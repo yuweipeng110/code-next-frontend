@@ -1,0 +1,14 @@
+.tag-list {
+    a {
+        .ant-tag {
+            /* padding: 2px 8px !important; */
+            font-size: inherit !important;
+            color: #515767;
+
+            &:hover {
+                color: #1677ff;
+                background-color: #eaf2ff;
+            }
+        }
+    }
+}

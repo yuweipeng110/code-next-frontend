@@ -1,0 +1,21 @@
+.tag-card {
+    .ant-row {
+        margin: 0 !important;
+    }
+
+    .ant-card-body {
+        padding: 12px !important;
+    }
+
+    .space-skeleton {
+        width: 100%;
+
+        .ant-space-item {
+            .ant-skeleton {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+}

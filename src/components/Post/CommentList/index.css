@@ -1,0 +1,120 @@
+.comment-card {
+    .editor-container {
+        display: flex;
+        align-items: flex-start;
+
+        .ant-avatar {
+            margin-right: 30px !important;
+        }
+    }
+
+    .comment-reply {
+        margin-top: 16px;
+    }
+
+    .comment-list {
+        .ant-list-item {
+            padding: 12px 0;
+        }
+
+        .comment-actions {
+            margin-block-start: 16px;
+
+            .hoverable-icon {
+                cursor: pointer;
+
+                &:hover {
+                    color: #1890ff;
+                }
+            }
+
+            .hoverable-icon.active {
+                color: #1890ff;
+            }
+
+            .comment-action-item {
+                &:first-child {
+                    padding-inline-start: 0;
+                }
+
+                position: relative;
+                display: inline-block;
+                padding: 0 16px;
+                color: rgba(0, 0, 0, 0.45);
+                font-size: 14px;
+                text-align: center;
+
+                .ant-list-item-action-split {
+                    position: absolute;
+                    inset-block-start: 50%;
+                    inset-inline-end: 0;
+                    width: 1px;
+                    height: 14px;
+                    transform: translateY(-50%);
+                    background-color: rgba(5, 5, 5, 0.06);
+                }
+
+            }
+        }
+    }
+
+    .reply-list {
+        margin-top: 4px;
+        margin-left: 48px;
+
+        .get-all-btn {
+            color: rgba(0, 0, 0, 0.3) !important;
+            padding-left: 8px;
+            margin-bottom: 8px;
+            margin-top: 8px;
+
+            &:hover {
+                background: transparent !important;
+                color: #1677ff !important;
+            }
+        }
+
+        .flex-box {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .top-content {
+            position: relative;
+
+            .avatar {
+                display: inline-block;
+                margin-right: 8px;
+            }
+
+            .other {
+                display: inline;
+
+                font-size: 14px;
+
+                .user-name {
+                    font-size: 16px;
+                }
+
+                .rep {
+                    font-size: 14px;
+                    margin: 8px;
+                }
+            }
+
+            .reply-content {
+                margin-left: 2px;
+                color: rgba(0, 0, 0, 0.45);
+                font-weight: 400;
+                line-height: 28px
+            }
+        }
+    }
+
+    .reply-list .top-content .other,
+    .reply-list .top-content .other .user-name {
+        line-height: 28px;
+    }
+}

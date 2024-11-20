@@ -1,0 +1,11 @@
+.card-anchor {
+    .ant-pro-card-body {
+        max-height: 300px !important;
+        position: relative;
+        /* margin: 0; */
+        overflow: auto;
+        transition: max-height .5s;
+        padding-block: 0 !important;
+        margin: 16px 0 !important;
+    }
+}

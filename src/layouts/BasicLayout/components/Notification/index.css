@@ -1,0 +1,11 @@
+.notification {
+    .ant-dropdown-menu-item {
+        justify-content: center;
+        padding: 10px 18px !important;
+    }
+
+    .bell-icon {
+        font-size: 20px;
+        color: rgb(136, 136, 136) !important;
+    }
+}

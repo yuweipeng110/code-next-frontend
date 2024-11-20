@@ -1,0 +1,13 @@
+.post-float-button {
+    inset-inline-start: 250px;
+    inset-inline-end: auto !important;
+    /* inset-inline-start: -1250px; */
+    top: 150px !important;
+    bottom: auto !important;
+
+    .ant-float-btn {
+        width: 45px !important;
+        height: 45px !important;
+        z-index: 0;
+    }
+}

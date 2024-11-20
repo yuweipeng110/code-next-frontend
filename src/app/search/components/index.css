@@ -1,0 +1,60 @@
+.search-post,
+.search-tag,
+.search-user {
+    /* background: white; */
+    /* background: #f3f3f3; */
+    /* height: 100vh; */
+    background-color: #fff;
+    max-width: 700px;
+
+    /* padding: 20px; */
+    .ant-skeleton {
+        padding: 20px;
+    }
+}
+
+.search-post {
+
+    .meta-row {
+        font-weight: normal;
+        font-size: 12px;
+        color: #b2bac2 !important;
+        margin-block-end: 0 !important;
+
+        .ant-list-item-meta-title {
+            margin-block-end: 0 !important;
+        }
+    }
+
+    .title-row {
+        margin: 4px 0 0 0;
+        font-size: 17px;
+    }
+
+    .content-row {
+        color: #5b6169;
+        font-size: 13px;
+    }
+
+    .space-nowap {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.search-picture {
+    .ant-row {
+        margin: 0 !important;
+    }
+
+    .ant-card-body {
+        padding: 12px !important;
+    }
+
+    .skeleton-card,
+    .skeleton-card-image {
+        width: 100% !important;
+        height: 180px !important;
+    }
+}

@@ -1,0 +1,38 @@
+.postCardSection {
+    .ant-statistic {
+        color: inherit !important;
+
+        .ant-statistic-content {
+            color: inherit !important;
+            font-size: inherit !important;
+        }
+    }
+
+    .ant-typography {
+        a {
+            color: #515767 !important;
+
+            &:hover {
+                color: #1890ff !important;
+            }
+        }
+    }
+
+    .tag-list-box {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        margin-bottom: -12px;
+        color: #515767;
+        font-size: 14px;
+
+        .tag-list {
+            display: flex;
+            line-height: 2;
+
+            .tag-list-title {
+                margin-right: 8px;
+            }
+        }
+    }
+}

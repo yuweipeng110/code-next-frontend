@@ -1,0 +1,40 @@
+.post-card-section {
+
+    .ant-card-body {
+        padding: 10px 24px !important;
+
+        .ant-list-item {
+            padding: 8px !important;
+
+            .ant-list-item-meta {
+                margin-block-end: 0 !important;
+
+                .ant-list-item-meta-title {
+                    line-height: 22px;
+                    font-size: 14px;
+                    font-weight: 400;
+                    color: #252933;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    margin-block-end: 6px;
+                }
+
+                .ant-list-item-meta-description {
+                    display: flex;
+                    /* font-size: 14px;
+                    line-height: 22px;
+                    color: #8a919f;
+                    font-weight: 400; */
+                }
+
+                .entry-meta {
+                    font-size: 14px;
+                    line-height: 22px;
+                    color: #8a919f;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}

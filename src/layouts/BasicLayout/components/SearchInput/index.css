@@ -1,0 +1,36 @@
+.search-input {
+    display: flex;
+    align-items: center;
+    margin-inline-end: 12px;
+    /* width: 400px; */
+    background: rgba(0, 0, 0, 0);
+
+    .input-search {
+        width: 250px;
+        margin: 0 10px;
+        height: 28px;
+        transition: width .3s;
+    }
+
+    .expanded {
+        /* 扩展后的宽度 */
+        width: 350px !important;
+    }
+
+    .add-group {
+        overflow: visible;
+        width: 100px;
+        margin-left: 5px;
+        transition: width .3s;
+    }
+
+    .hidden {
+        width: 0;
+        padding: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .visible {
+        overflow: visible;
+    }
+}

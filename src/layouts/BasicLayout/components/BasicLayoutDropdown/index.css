@@ -1,0 +1,6 @@
+.basic-layout-dropdown {
+    .ant-dropdown-menu-item {
+        justify-content: center;
+        padding: 10px 18px !important;
+    }
+}

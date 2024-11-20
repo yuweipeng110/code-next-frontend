@@ -1,0 +1,40 @@
+#post-page {
+
+    .post-list-sider {
+        .sider-bar {
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            bottom: 0;
+            right: -3px;
+            width: 6px;
+            /* -webkit-user-select: none;
+            -moz-user-select: none; */
+            user-select: none;
+            cursor: pointer;
+
+            .collapse-btn {
+                position: absolute;
+                top: 120px;
+                right: -4px;
+                /* left: 0px; */
+                z-index: 9;
+                width: 14px;
+                height: 44px;
+                padding: 0;
+                border-radius: 6px;
+
+                .icon {
+                    position: absolute;
+                    top: 50%;
+                    left: -1px;
+                    margin-left: 0;
+                    color: #585a5a;
+                    font-size: 14px;
+                    transform: translateY(-50%);
+                }
+            }
+
+        }
+    }
+}
