@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import BasicLayout from "@/layouts/BasicLayout";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { Provider, useDispatch } from "react-redux";
@@ -7,7 +7,9 @@ import store, { AppDispatch } from "@/stores";
 import { getLoginUserUsingGet } from "@/api/userController";
 import { setLoginUser } from "@/stores/loginUser";
 import "./globals.css";
-import { useRouter, useSearchParams } from 'next/navigation';
+import '../../mock/postCommentList';
+import '../../mock/post';
+import '../../mock/user';
 
 /**
  * 全局初始化逻辑
@@ -42,29 +44,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const router = useRouter();
-
-
-  useEffect(() => {
-    const handleMessage = (event: any) => {
-      const data = event.data;
-      switch (data.cmd) {
-        case 'getFormJson':
-          console.log('xxxx', data);
-          // window.history.back();
-          router.back();
-          // 处理业务逻辑
-          break;
-      }
-    };
-
-    window.addEventListener("message", handleMessage);
-
-    // 清理函数
-    return () => {
-      window.removeEventListener("message", handleMessage);
-    };
-  }, []);
 
   return (
     <html lang="zh">

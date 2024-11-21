@@ -1,9 +1,9 @@
 import { loginUserInfoStorage } from "@/utils/token";
 import axios, { AxiosRequestConfig } from "axios";
 
-// 创建 Axios 示例
+// 创建 Axios 实例
 const myAxios = axios.create({
-    baseURL: "http://localhost:8101",
+    // baseURL: "http://localhost:8101", // 使用mock数据请注释掉这一行
     timeout: 10000,
     withCredentials: true,
     headers: {
@@ -56,11 +56,14 @@ myAxios.interceptors.response.use(
 );
 
 // export default myAxios;
-export default async function request<T>(url: string, params: AxiosRequestConfig): Promise<T> {
-    const result = await myAxios<T>({
+export default function request<T>(url: string, params: AxiosRequestConfig): Promise<T> {
+    return myAxios<T>({
         ...params,
         url,
+    }).then(response => {
+        return response.data;
+    }).catch(error => {
+        console.error(error);
+        throw error;
     });
-
-    return result.data;
 }

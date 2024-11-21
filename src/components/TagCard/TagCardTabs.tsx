@@ -59,7 +59,6 @@ const TagCardTabs = React.memo(() => {
      * 监听搜索参数变化时加载数据
      */
     useEffect(() => {
-        console.log('loginUser', loginUser, searchParams);
         let params = searchParams;
         if (loginUser.id) {
             params = {

@@ -1,44 +1,51 @@
-const { generateService } = require("@umijs/openapi");
-/**
- * operationId format example: `@Controller('dataset') => DatasetController_${FunctionName}`
- */
-const re = /.+?controller[-_ .](\w)/gi;
+// next.config.mjs
+/** @type {import('next').NextConfig} */
+import { createProxyMiddleware } from 'http-proxy-middleware';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-generateService({
-    requestLibPath: "import request from '@/libs/request'",
-    schemaPath: "http://localhost:8101/api/v2/api-docs",
-    serversPath: "./src",
-    // dataFields: ['code', 'data', 'message', 'success'],
-    // requestOptionsType: 'Record<string, any>',
-    hook: {
-        customFunctionName(operationObject, apiPath) {
-            console.log("operationObject", operationObject);
-            console.log("apiPath", apiPath);
-            const { operationId } = operationObject;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-            if (!operationId) {
-                console.warn('[Warning] no operationId', apiPath);
-                return;
-            }
-
-            const funcName = operationId.replace(re, (_all: any, letter: any) => {
-                const r = letter.toUpperCase();
-                return r;
-            });
-
-            operationObject.operationId = funcName;
-            console.log("funcName", funcName);
-            return funcName;
-        },
-        // customType(schemaObject, namespace, defaultGetType) {
-        //   const type = defaultGetType(schemaObject, namespace);
-
-        //   console.log('params => ', schemaObject, namespace, type);
-        //   // 提取出 data 的类型
-        //   const regex = /API\.ResOp & \{ 'data'\?: (.+); \}/;
-        //   const result = type.replace(regex, '$1');
-        //   console.log('result => ', result);
-        //   return result;
-        // },
+const nextConfig = {
+    devIndicators: {
+        autoPrerender: false,
     },
-});
+    webpack: (config, { isServer }) => {
+        if (!isServer) {
+            config.resolve.alias['@mock'] = path.resolve(__dirname, 'mock');
+        }
+        return config;
+    },
+    async rewrites() {
+        return [
+            {
+                source: '/api/:path*',
+                destination: '/mock/:path*', // 直接代理到本地的 Mock 文件
+            },
+        ];
+    },
+    async headers() {
+        return [
+            {
+                source: '/api/:path*',
+                headers: [
+                    {
+                        key: 'Access-Control-Allow-Origin',
+                        value: '*',
+                    },
+                    {
+                        key: 'Access-Control-Allow-Methods',
+                        value: 'GET,POST,PUT,DELETE,OPTIONS',
+                    },
+                    {
+                        key: 'Access-Control-Allow-Headers',
+                        value: 'Content-Type, Authorization',
+                    },
+                ],
+            },
+        ];
+    },
+};
+
+export default nextConfig;

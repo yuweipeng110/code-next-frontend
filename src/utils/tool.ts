@@ -7,7 +7,6 @@
 export const debounce = (func: Function, delay: number) => {
     let timer: NodeJS.Timeout;
     return (...args: any) => {
-        console.log('args', args);
         if (timer) clearInterval(timer);
         timer = setTimeout(() => {
             func.apply(this, args);

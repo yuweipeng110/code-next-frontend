@@ -21,6 +21,9 @@
     "antd": "^5.21.3",
     "axios": "^1.7.7",
     "github-markdown-css": "^5.7.0",
+    "hast-util-to-string": "^3.0.1",
+    "http-proxy-middleware": "^3.0.3",
+    "mockjs": "^1.1.0",
     "moment": "^2.30.1",
     "next": "14.2.15",
     "react": "^18",
@@ -30,6 +33,7 @@
     "react-sticky-box": "^2.0.5"
   },
   "devDependencies": {
+    "@types/mockjs": "^1.0.10",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

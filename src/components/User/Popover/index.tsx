@@ -21,7 +21,7 @@ const UserPopoverSection: React.FC<Props> = (props) => {
     return (
         <Popover overlayClassName="user-info-card-popover" content={(
             <Card>
-                <img src="http://www.mianshiya.com/assets/svg/user-info-card/userCard.png" className="card-background-image" />
+                {/* <img src="http://www.mianshiya.com/assets/svg/user-info-card/userCard.png" className="card-background-image" /> */}
                 <div className="card-content">
                     <div className="avatar-container">
                         <div className="user-info-avatar-container">

@@ -29,9 +29,7 @@ const UserLoginPage: React.FC = () => {
   const doSubmit = async (values: API.UserLoginDTO) => {
     try {
       const res = await userLoginUsingPost(values);
-      console.log('res', res)
       if (res.data) {
-        console.log('res sucesccss');
         message.success("登录成功");
         // 保存用户登录状态
         dispatch(setLoginUser(res.data));
