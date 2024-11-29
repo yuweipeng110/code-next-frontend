@@ -3,7 +3,9 @@ import { Avatar, Button, Form, Input, Row } from 'antd';
 
 type Props = {
     // 帖子对象
-    postCurrent: API.PostVO;
+    // postCurrent: API.PostVO;
+    // 评论id
+    postId: string;
     // 评论总数
     commentTotal: number;
 }
@@ -11,8 +13,9 @@ type Props = {
 /**
  * 添加评论
  */
-const AddComment: React.FC<Props> = (props) => {
-    const { postCurrent, commentTotal } = props;
+const AddComment: React.FC<Props> = React.memo((props) => {
+    // const { postCurrent, commentTotal } = props;
+    const { postId, commentTotal } = props;
 
     const placeholder = commentTotal === 0 ? "抢首评，友善交流" : "平等表达，友善交流";
 
@@ -41,6 +44,6 @@ const AddComment: React.FC<Props> = (props) => {
             </Form.Item>
         </Form>
     )
-}
+})
 
 export default AddComment;

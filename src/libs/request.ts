@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig } from "axios";
 
 // 创建 Axios 实例
 const myAxios = axios.create({
-    // baseURL: "http://localhost:8101", // 使用mock数据请注释掉这一行
+    baseURL: "http://localhost:8101", // 使用mock数据请注释掉这一行
     timeout: 10000,
     withCredentials: true,
     headers: {

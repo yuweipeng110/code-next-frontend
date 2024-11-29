@@ -383,8 +383,10 @@ declare namespace API {
     createTime?: string;
     description?: string;
     follow?: boolean;
+    followCount?: number;
     id?: string;
     picture?: string;
+    postCount?: number;
     title?: string;
     updateTime?: string;
     user?: UserVO;

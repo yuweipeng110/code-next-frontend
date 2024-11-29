@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ProCard } from '@ant-design/pro-components';
 import { Card, List, Image, Typography, Button, Skeleton, Empty, Space, message } from 'antd';
 import InfiniteScrollComponent from '../InfiniteScrollComponent';
@@ -26,7 +26,6 @@ type Props = {
  * 标签卡片
  */
 const TagCard: React.FC<Props> = React.memo((props) => {
-
     const { data, total, loadMoreData } = props;
 
     const [currentExecuteId, setCurrentExecuteId] = useState<string>("");
@@ -35,7 +34,7 @@ const TagCard: React.FC<Props> = React.memo((props) => {
     /**
      * 数据改变时 向关注数据ID列表添加 已关注的标签id
      */
-    useMemo(() => {
+    useEffect(() => {
         if (data) {
             setFollowedDataIdList(data.filter(item => item.follow).map(item => item.id || ""));
         }
@@ -48,9 +47,8 @@ const TagCard: React.FC<Props> = React.memo((props) => {
      * @returns 
      */
     const handleTagFollowed = async (tagId: string) => {
-        if (!tagId) return true;
+        if (!tagId) return;
         setCurrentExecuteId(tagId);
-        // const hide = message.loading('正在更新');
         try {
             const res = await doTagFollowUsingPost({ tagId: tagId as unknown as number });
             if (res.data === 1) { // 关注
@@ -58,44 +56,22 @@ const TagCard: React.FC<Props> = React.memo((props) => {
             } else if (res.data === -1) { //取消关注
                 setFollowedDataIdList(prev => prev.filter((item) => item !== tagId));
             }
-
-            // hide();
-            // message.success('更新成功');
         } catch (error: any) {
-            // hide();
             message.error('更新失败，' + error.message);
         }
         setCurrentExecuteId("");
     }
 
     /**
-     * 关注按钮视图
-     * 
-     * @param tagItem 
-     * @returns 
+     * 是否关注
      */
-    const subscribeBtnView = (tagId: string) => {
-        // 是否关注
-        const isFollowed = followedDataIdList.indexOf(tagId) >= 0;
-        if (currentExecuteId === tagId) {
-            return (
-                <Button className={`subscribe-btn ${isFollowed ? 'subscribed' : ''}  `} loading />
-            )
-        } else {
-            if (isFollowed) {
-                return (
-                    <Button className="subscribe-btn subscribed" onClick={() => handleTagFollowed(tagId)}>
-                        已关注
-                    </Button>
-                )
-            } else {
-                return (
-                    <Button className="subscribe-btn" onClick={() => handleTagFollowed(tagId)} >
-                        关注
-                    </Button>
-                )
-            }
-        }
+    const isFollowed = (tagId: string) => followedDataIdList.includes(tagId);
+
+    /**
+     * 获取当前关注数量
+     */
+    const getCurrentFollowCount = (tagItem: API.TagVO) => {
+        return followedDataIdList.includes(tagItem.id) ? tagItem.followCount : tagItem.followCount - 1;
     }
 
     const cardView = (tagItem: API.TagVO) => {
@@ -129,8 +105,24 @@ const TagCard: React.FC<Props> = React.memo((props) => {
                             ellipsis={{ rows: 1 }}
                             style={{ marginBottom: 0 }}
                         >
-                            <p><Typography.Text>694372 关注  512328 文章</Typography.Text></p>
-                            {subscribeBtnView(tagItem.id || "")}
+                            <p>
+                                <Typography.Text>
+                                    {getCurrentFollowCount(tagItem)} 关注  {tagItem.postCount} 文章
+                                </Typography.Text>
+                            </p>
+                            {
+                                currentExecuteId === tagItem.id ? (
+                                    <Button className={`subscribe-btn ${isFollowed ? 'subscribed' : ''}`} loading />
+                                ) : (
+                                    <Button
+                                        className={`subscribe-btn ${isFollowed ? 'subscribed' : ''}`}
+                                        onClick={() => handleTagFollowed(tagItem.id)}
+                                    >
+                                        {isFollowed ? '已关注' : '关注'}
+                                    </Button>
+                                )
+                            }
+
                         </Typography.Paragraph>
                     }
                 />
@@ -178,7 +170,8 @@ const TagCard: React.FC<Props> = React.memo((props) => {
     return (
         <div className="tag-card">
             <InfiniteScrollComponent
-                data={data}
+                // data={data}
+                dataLength={data.length}
                 total={total}
                 loadMoreData={loadMoreData}
                 loader={loaderView()}

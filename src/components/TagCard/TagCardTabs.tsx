@@ -136,7 +136,7 @@ const TagCardTabs = React.memo(() => {
             searchUserId: loginUser.id as unknown as number,
             current: 1,
             type,
-            sortField: sort === "newest" ? "create_time" : "view_count",
+            sortField: sort === "newest" ? "create_time" : "view_num",
         })
     }
 

@@ -1,7 +1,6 @@
 "use client";
-import { useState } from 'react';
-import { Dropdown, MenuProps } from 'antd';
-import { BellFilled, BellOutlined, CommentOutlined, LikeOutlined, MessageOutlined, SoundOutlined, UserAddOutlined } from '@ant-design/icons';
+import { Badge, Dropdown, MenuProps } from 'antd';
+import { BellFilled, CommentOutlined, LikeOutlined, MessageOutlined, SoundOutlined, UserAddOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import './index.css';
 
@@ -10,8 +9,6 @@ import './index.css';
  * @returns 
  */
 const Notification = () => {
-
-    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const items: MenuProps['items'] = [
         {
@@ -37,22 +34,21 @@ const Notification = () => {
         {
             key: 'system',
             icon: <SoundOutlined />,
-            label: <Link href={'/notification/system'}>系统通知</Link>,
+            label: <Link href={'/notification/system'}><Badge count={5} offset={[30, 8]}>系统通知</Badge></Link>,
         },
     ];
 
     return (
-        <div className="notification" aria-hidden >
+        <div className="notification" aria-hidden>
             <Link href={"/notification/comment"} className="flex" style={{ padding: "14px 6px" }}>
                 <Dropdown
-                    overlayClassName="basic-layout-dropdown"
+                    overlayClassName="notification-dropdown"
                     menu={{ items }}
                     placement="bottomRight"
-                    onOpenChange={(open) => {
-                        setIsOpen(open);
-                    }}
                 >
-                    {!isOpen ? <BellOutlined className="bell-icon" /> : <BellFilled className="bell-icon" />}
+                    <Badge size="small" count={5} offset={[2, 0]}>
+                        <BellFilled className="bell-icon" />
+                    </Badge>
                 </Dropdown>
             </Link>
         </div>

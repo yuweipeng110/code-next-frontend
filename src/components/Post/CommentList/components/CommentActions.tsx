@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Dropdown, Flex, Space } from 'antd';
 import { DeleteOutlined, EllipsisOutlined, LikeFilled, LikeOutlined, MessageFilled, MessageOutlined, WarningOutlined } from '@ant-design/icons';
-import { LoadPostCommentVO } from '../type';
+import { LoadPostCommentReplyVO, LoadPostCommentVO } from '../type';
 import { formatTime } from '@/utils/date';
+import { CommentReplyEditProvider } from '../CommentContext';
 
 const IconText = ({ icon, text, onClick, className }: { icon: React.FC; text: string, onClick?: (event: any) => void, className?: string }) => (
     <Space onClick={onClick} className={`hoverable-icon ${className}`}>
@@ -12,48 +13,20 @@ const IconText = ({ icon, text, onClick, className }: { icon: React.FC; text: st
 );
 
 type Props = {
-    // 评论对象
-    commentCurrent: API.PostCommentVO;
-    replyMoreDataList: LoadPostCommentVO[];
-    setReplyMoreDataList: (list: LoadPostCommentVO[]) => void;
-    // 评论回复对象（可选）
-    replyCurrent?: API.PostCommentReplyVO;
+    // 加工评论对象
+    loadCommentCurrent: LoadPostCommentVO;
+    // 加工评论回复对象（可选）
+    loadReplyCurrent?: LoadPostCommentReplyVO;
 }
 
 /**
  * 评论操作区
  */
 const CommentActions: React.FC<Props> = React.memo((props) => {
-    const { commentCurrent, replyMoreDataList, setReplyMoreDataList, replyCurrent } = props;
-
-    /**
-     * 切换评论或回复的可见状态
-     * @param commentId 评论ID
-     * @param replyId 回复ID（可选）
-     */
-    const toggleReplyVisibility = (commentId: string, replyId?: string) => {
-        const newReplyMoreDataList = replyMoreDataList.map(commentItem => {
-            if (commentItem.id === commentId) {
-                if (replyId) {
-                    // 更新回复列表中指定回复的可见状态
-                    commentItem.replyList = commentItem.replyList.map(replyItem => {
-                        if (replyItem.id === replyId) {
-                            return {
-                                ...replyItem,
-                                isCurrentAddCommentShow: !replyItem.isCurrentAddCommentShow,
-                            };
-                        }
-                        return replyItem;
-                    });
-                } else {
-                    // 更新评论的可见状态
-                    return { ...commentItem, isCurrentAddCommentShow: !commentItem.isCurrentAddCommentShow };
-                }
-            }
-            return commentItem;
-        });
-        setReplyMoreDataList(newReplyMoreDataList);
-    };
+    // const { commentCurrent, replyMoreDataList, setReplyMoreDataList, replyCurrent } = props;
+    const { loadCommentCurrent, loadReplyCurrent } = props;
+    const commentCurrent = loadCommentCurrent.comment;
+    const { toggleCurrentCommentReplyVisibility } = useContext(CommentReplyEditProvider);
 
     /**
      * 获取评论或回复的文本
@@ -61,7 +34,7 @@ const CommentActions: React.FC<Props> = React.memo((props) => {
      * @returns 评论或回复的文本
      */
     const getReplyText = (comment: API.PostCommentVO) => {
-        if ("replyPage" in comment) {
+        if (!loadReplyCurrent) {
             return comment.replyPage.total > 0 ? comment.replyPage.total.toString() : "评论";
         }
         return "回复";
@@ -77,21 +50,25 @@ const CommentActions: React.FC<Props> = React.memo((props) => {
          * @param replyId 回复ID（可选）
          * @returns 是否可见
          */
-        const isReplyVisible = (commentId: string, replyId?: string) => {
-            if (replyId) {
+        const isReplyVisible = () => {
+            if (loadReplyCurrent) {
                 // 检查回复列表中指定回复是否可见
-                return replyMoreDataList.find(commentItem => commentItem.id === commentId)?.replyList.find(replyItem => replyItem.id === replyId && replyItem.isCurrentAddCommentShow);
+                return loadReplyCurrent.isCurrentAddCommentShow;
+                // return replyMoreDataList.find(commentItem => commentItem.id === commentId)?.replyList.find(replyItem => replyItem.id === replyId && replyItem.isCurrentAddCommentShow);
             }
             // 检查评论是否可见
-            return replyMoreDataList.find(commentItem => commentItem.id === commentId && commentItem.isCurrentAddCommentShow);
+            return loadCommentCurrent.isCurrentAddCommentShow;
+            // return replyMoreDataList.find(commentItem => commentItem.id === commentId && commentItem.isCurrentAddCommentShow);
         };
 
-        const commentId = commentCurrent.id;
-        const replyId = replyCurrent?.id;
-        const isVisible = isReplyVisible(commentId, replyId);
+        const isVisible = isReplyVisible();
 
         const iconPropsInit = {
-            onClick: () => toggleReplyVisibility(commentId, replyId),
+            onClick: () => {
+                const commentId = commentCurrent.id;
+                const replyId = loadReplyCurrent?.id;
+                toggleCurrentCommentReplyVisibility(commentId, replyId)
+            },
         }
 
         const iconProps = isVisible
@@ -114,9 +91,9 @@ const CommentActions: React.FC<Props> = React.memo((props) => {
      * 评论回复点赞功能view
      */
     const commentReplyThumbView = () => {
-        const thumbNum = replyCurrent ? replyCurrent.thumbNum : commentCurrent.thumbNum;
+        const thumbNum = loadReplyCurrent ? loadReplyCurrent.thumbNum : commentCurrent.thumbNum;
         const text = thumbNum === 0 ? "点赞" : thumbNum.toString();
-        const hasThumb = replyCurrent ? replyCurrent.hasThumb : commentCurrent.hasThumb;
+        const hasThumb = loadReplyCurrent ? loadReplyCurrent.hasThumb : commentCurrent.hasThumb;
 
         const iconProps = {
             text,

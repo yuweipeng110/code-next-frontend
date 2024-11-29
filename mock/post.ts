@@ -53,32 +53,32 @@ const url = "/api/post/get/vo?id=1843471468667645955";
 const regUrl = RegExp(`/api/post/get/vo` + ".*");
 
 
-/**
- * 获取帖子数据
- */
-Mock.mock(regUrl, (req, res) => {
+// /**
+//  * 获取帖子数据
+//  */
+// Mock.mock(regUrl, (req, res) => {
 
-    const params = getRequestQuery(req.url);
-    // 从请求中获取 id 参数
-    const { id } = params;
+//     const params = getRequestQuery(req.url);
+//     // 从请求中获取 id 参数
+//     const { id } = params;
 
-    // 根据 id 查找帖子数据
-    const post = posts[id as string];
-    console.log("/api/post/get/vo mock result", post);
+//     // 根据 id 查找帖子数据
+//     const post = posts[id as string];
+//     console.log("/api/post/get/vo mock result", post);
 
-    if (post) {
-        return {
-            success: true,
-            code: 20000,
-            message: 'ok',
-            data: post
-        };
-    } else {
-        return {
-            success: false,
-            code: 40400,
-            message: '未找到帖子',
-            data: null
-        };
-    }
-});
+//     if (post) {
+//         return {
+//             success: true,
+//             code: 20000,
+//             message: 'ok',
+//             data: post
+//         };
+//     } else {
+//         return {
+//             success: false,
+//             code: 40400,
+//             message: '未找到帖子',
+//             data: null
+//         };
+//     }
+// });

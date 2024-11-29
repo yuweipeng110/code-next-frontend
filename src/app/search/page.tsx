@@ -1,15 +1,21 @@
 "use client";
-import { useCallback, useEffect, useState } from 'react';
+import { lazy, useCallback, useEffect, useState } from 'react';
 import { message, Tabs, TabsProps } from 'antd';
 import { useRouter, useSearchParams } from 'next/navigation';
 import StickyBox from 'react-sticky-box';
-import SearchAll from './components/SearchAll';
-import SearchPost from './components/SearchPost';
-import SearchTag from './components/SearchTag';
-import SearchPicture from './components/SearchPicture';
-import SearchUser from './components/SearchUser';
+// import SearchAll from './components/SearchAll';
+// import SearchPost from './components/SearchPost';
+// import SearchTag from './components/SearchTag';
+// import SearchPicture from './components/SearchPicture';
+// import SearchUser from './components/SearchUser';
 import { searchAllUsingPost } from '@/api/searchController';
 import './index.css';
+
+const SearchAll = lazy(() => import('./components/SearchAll'));
+const SearchPost = lazy(() => import('./components/SearchPost'));
+const SearchTag = lazy(() => import('./components/SearchTag'));
+const SearchPicture = lazy(() => import('./components/SearchPicture'));
+const SearchUser = lazy(() => import('./components/SearchUser'));
 
 type SearchParamsType = {
     type: string;

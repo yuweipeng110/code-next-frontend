@@ -4,7 +4,9 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 type Props = {
     // 数据源
-    data: any[];
+    data?: any[];
+    // 数据源长度
+    dataLength?: number;
     // 数据总数
     total: number;
     // 到达底部后必须调用的函数，例如，初始数据=[1,2,3]，然后下一次数据加载应为[1,2,3,4,5,6]
@@ -23,26 +25,26 @@ type Props = {
  * @returns 
  */
 const InfiniteScrollComponent: React.FC<Props> = React.memo((props) => {
-    const { children, data, total, loadMoreData, loader } = props;
+    const { children, data, dataLength, total, loadMoreData, loader } = props;
 
     return (
         <InfiniteScroll
-            dataLength={data.length}
+            dataLength={dataLength}
             next={() => {
                 // if (data.length > 0 && total > 0) {
-                if (data.length < total) {
+                if (dataLength < total) {
                     console.log("next");
                     loadMoreData();
                 }
             }}
-            hasMore={data.length < total}
+            hasMore={dataLength < total}
             // loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
             loader={loader}
             endMessage={total > 0 ? <Divider plain>It is all, nothing more 🤐</Divider> : <></>}
-            scrollableTarget="scrollableDiv"
+            // scrollableTarget="scrollableDiv"
             children={children}
         />
     )
 })
 
-export default InfiniteScrollComponent
+export default InfiniteScrollComponent;

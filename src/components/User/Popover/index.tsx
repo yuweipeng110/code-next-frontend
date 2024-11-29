@@ -16,7 +16,7 @@ type Props = {
  * @param props 
  * @returns 
  */
-const UserPopoverSection: React.FC<Props> = (props) => {
+const UserPopoverSection: React.FC<Props> = React.memo((props) => {
     const { userInfo = DEFAULT_USER, children } = props;;
     return (
         <Popover overlayClassName="user-info-card-popover" content={(
@@ -59,6 +59,6 @@ const UserPopoverSection: React.FC<Props> = (props) => {
             {children}
         </Popover>
     )
-}
+})
 
 export default UserPopoverSection;

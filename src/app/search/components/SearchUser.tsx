@@ -29,7 +29,8 @@ const SearchUser: React.FC<Props> = React.memo((props) => {
     return (
         <div className="search-user">
             <InfiniteScrollComponent
-                data={data}
+                // data={data}
+                dataLength={data.length}
                 total={total}
                 loadMoreData={loadMoreData}
                 loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}

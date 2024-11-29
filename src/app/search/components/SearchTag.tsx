@@ -16,6 +16,7 @@ type Props = {
  * @returns 
  */
 const SearchTag: React.FC<Props> = React.memo((props) => {
+    console.log('render SearchTag')
 
     const { data, total, loadMoreData, keyword } = props;
 
@@ -29,7 +30,8 @@ const SearchTag: React.FC<Props> = React.memo((props) => {
     return (
         <div className="search-tag">
             <InfiniteScrollComponent
-                data={data}
+                // data={data}
+                dataLength={data.length}
                 total={total}
                 loadMoreData={loadMoreData}
                 loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}

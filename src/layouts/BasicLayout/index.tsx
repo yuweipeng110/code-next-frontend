@@ -12,6 +12,7 @@ import BasicLayoutDropdown from './components/BasicLayoutDropdown';
 import VipEntry from './components/VipEntry';
 import Notification from './components/Notification';
 import "./index.css";
+import SuspensionPanel from '@/components/SuspensionPanel';
 
 type Props = {
     children: React.ReactNode;
@@ -107,6 +108,7 @@ const BasicLayout: React.FC<Props> = ({ children }) => {
             >
                 {children}
             </ProLayout>
+            <SuspensionPanel />
         </div>
     );
 };

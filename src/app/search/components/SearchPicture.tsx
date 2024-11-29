@@ -87,7 +87,8 @@ const SearchPicture: React.FC<Props> = React.memo((props) => {
     return (
         <div className="search-picture">
             <InfiniteScrollComponent
-                data={data}
+                // data={data}
+                dataLength={data.length}
                 total={total}
                 loadMoreData={loadMoreData}
                 loader={loaderView()}

@@ -43,6 +43,8 @@ const BasicLayoutDropdown: React.FC<Props> = ({ children }) => {
     return (
         <Dropdown
             overlayClassName="basic-layout-dropdown"
+            trigger={['click']}
+            placement="bottomRight"
             menu={{
                 items: [
                     {

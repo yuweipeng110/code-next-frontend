@@ -59,7 +59,7 @@ const plugins = [
  * @param props
  * @constructor
  */
-const MdViewer: React.FC<Props> = (props) => {
+const MdViewer: React.FC<Props> = React.memo((props) => {
   const { value = "", isClamp = false } = props;
 
   const [isClampState, setIsClampState] = useState<boolean>(isClamp);
@@ -95,6 +95,6 @@ const MdViewer: React.FC<Props> = (props) => {
       }
     </>
   );
-};
+})
 
 export default MdViewer;

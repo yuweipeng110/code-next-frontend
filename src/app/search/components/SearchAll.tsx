@@ -16,7 +16,8 @@ const SearchAll: React.FC<Props> = React.memo((props) => {
         <div className="search-all">
             SearchAll
             <InfiniteScrollComponent
-                data={[]}
+                // data={[]}
+                dataLength={0}
                 total={10}
                 loadMoreData={() => { }}
                 loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}

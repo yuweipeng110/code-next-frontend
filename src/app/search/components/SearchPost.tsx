@@ -25,6 +25,7 @@ const IconText = ({ icon, text }: { icon: any; text: string }) => (
  * @returns 
  */
 const SearchPost: React.FC<Props> = React.memo((props) => {
+    console.log('render SearchPost')
 
     const { data, total, loadMoreData, keyword } = props;
 
@@ -43,7 +44,8 @@ const SearchPost: React.FC<Props> = React.memo((props) => {
     return (
         <div className="search-post">
             <InfiniteScrollComponent
-                data={data}
+                // data={data}
+                dataLength={data.length}
                 total={total}
                 loadMoreData={loadMoreData}
                 loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}

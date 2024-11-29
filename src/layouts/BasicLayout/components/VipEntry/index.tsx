@@ -1,4 +1,3 @@
-"use client";
 import { Flex, Space, Typography } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
