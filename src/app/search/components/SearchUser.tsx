@@ -3,6 +3,7 @@ import { Avatar, Button, Empty, List, Skeleton } from 'antd';
 import InfiniteScrollComponent from '@/components/InfiniteScrollComponent';
 import HighlightText from '@/components/Other/HighlightText';
 import "./index.css";
+import { DEFAULT_AVATAR } from '@/constants';
 
 type Props = {
     data: API.UserVO[];
@@ -41,7 +42,7 @@ const SearchUser: React.FC<Props> = React.memo((props) => {
                     renderItem={(item, index) => (
                         <List.Item key={index} style={{ padding: 20 }}>
                             <List.Item.Meta
-                                avatar={<Avatar src={item.userAvatar} size={45} />}
+                                avatar={<Avatar src={item.userAvatar || DEFAULT_AVATAR} size={45} />}
                                 title={<HighlightText text={index + "-" + data.length + item.userName} keyword={keyword} />}
                                 description={item.userProfile}
                             />

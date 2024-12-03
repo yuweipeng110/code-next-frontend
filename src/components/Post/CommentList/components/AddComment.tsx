@@ -1,11 +1,12 @@
 import React from 'react';
 import { Avatar, Button, Form, Input, Row } from 'antd';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/stores';
+import { DEFAULT_AVATAR } from '@/constants';
 
 type Props = {
     // 帖子对象
-    // postCurrent: API.PostVO;
-    // 评论id
-    postId: string;
+    post: API.PostVO;
     // 评论总数
     commentTotal: number;
 }
@@ -14,8 +15,9 @@ type Props = {
  * 添加评论
  */
 const AddComment: React.FC<Props> = React.memo((props) => {
-    // const { postCurrent, commentTotal } = props;
-    const { postId, commentTotal } = props;
+    const { post, commentTotal } = props;
+
+    const loginUser = useSelector((state: RootState) => state.loginUser);
 
     const placeholder = commentTotal === 0 ? "抢首评，友善交流" : "平等表达，友善交流";
 
@@ -23,7 +25,7 @@ const AddComment: React.FC<Props> = React.memo((props) => {
         <Form>
             <Form.Item name="content">
                 <div className="editor-container">
-                    <Avatar src="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg" size={48} />
+                    <Avatar src={loginUser.userAvatar || DEFAULT_AVATAR} size={48} />
                     <Input.TextArea
                         allowClear
                         showCount

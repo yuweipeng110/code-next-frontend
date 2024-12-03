@@ -6,7 +6,6 @@ import { formatTime } from '@/utils/date';
 import Link from 'next/link';
 import TagList from '@/components/TagList';
 import "./index.css";
-import IconText from '@/components/IconText';
 
 type Props = {
     postObject: API.PostVO;
@@ -17,21 +16,13 @@ type Props = {
  * 帖子内容卡片 Card
  * @returns 
  */
-const PostCardSection: React.FC<Props> = (props) => {
+const PostCardSection: React.FC<Props> = React.memo((props) => {
     const { postObject, postLoading } = props;
 
     return (
         <Card
             className="postCardSection"
             loading={postLoading}
-            actions={[
-                <IconText icon={LikeOutlined} text='17' actionIcon={LikeFilled} />,
-                <IconText icon={StarOutlined} text='3' actionIcon={StarFilled} actionColor="#FADB14" />,
-                <IconText icon={ShareAltOutlined} text='' />,
-                // <LikeOutlined key="like" title="1" twoToneColor="#eb2f96" />,
-                // <StarOutlined key="star" />,
-                // <ShareAltOutlined key="shareAlt" />,
-            ]}
         >
             <Typography.Title level={1} style={{ fontSize: 24 }}>
                 {postObject.title}
@@ -74,6 +65,6 @@ const PostCardSection: React.FC<Props> = (props) => {
             </div>
         </Card>
     )
-}
+})
 
 export default PostCardSection

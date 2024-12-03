@@ -1,49 +1,121 @@
 "use client";
-import React, { useContext } from 'react';
-import UserPopoverSection from '@/components/User/Popover';
-import { Avatar, Button, List, Skeleton, Space } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Avatar, Button, List, message, Skeleton, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import Link from 'next/link';
-import CommentActions from './CommentActions';
-import AddReplyComment from './AddReplyComment';
+import { listPostCommentReplyVoByPageUsingPost } from '@/api/postCommentReplyController';
+import { DEFAULT_AVATAR } from '@/constants';
+import UserInfoCardPopover from '@/components/User/Popover';
 import AuthorTag from './AuthorTag';
-import { LoadPostCommentReplyVO, LoadPostCommentVO } from '../type';
-import { AddCommentReplyProvider, CommentReplyEditProvider } from '../CommentContext';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/stores';
+import CommentActions from './CommentActions';
 
 type Props = {
-    loadCommentCurrent: LoadPostCommentVO;
-    loadMoreDataReplyMore: (commentId: string) => void;
-    loadingMoreId: string;
+    // 帖子对象
+    post: API.PostVO;
+    // 评论对象
+    comment: API.PostCommentVO;
 }
+
+type ReplySearchParams = {
+    current: number;
+    pageSize: number;
+    sortField?: string;
+    sortOrder?: string;
+    commentId?: string;
+}
+
+type LoadingPostCommentReplyVO = {
+    loading?: boolean;
+} & API.PostCommentReplyVO;
+
+const DEFAULT_PAGE_PARAMS = {
+    current: 1,
+    pageSize: 3,
+    sortField: "create_time",
+    sortOrder: "ascend",
+};
+
+// 默认展示的回复数，大于这个数量则显示回复更多
+const DEFAULT_SHOW_REPLY_NUM = 3;
 
 /**
  * 帖子评论回复列表
  */
 const CommentReplyList: React.FC<Props> = React.memo((props) => {
-    const { loadCommentCurrent, loadMoreDataReplyMore, loadingMoreId } = props;
-    // 获取登录用户信息
-    const loginUser = useSelector((state: RootState) => state.loginUser);
+    const { post, comment } = props;
 
-    // 使用memo了同时父组件使用了createContext 要接着向子组件传递 需要声明useContext，虽然没使用 但是需要声明，否则数据将不具有相应渲染（数据驱动渲染），
-    // 也就是数据改变了，但是子组件没有重新渲染
-    const { toggleCurrentCommentReplyVisibility } = useContext(CommentReplyEditProvider);
-    const { handleAddReplyCommentChange } = useContext(AddCommentReplyProvider);
+    const initCommentReplyList = comment.replyPage.records ? comment.replyPage.records.slice(0, 3) : [];
+
+    // 回复列表加载中临时列表
+    const [loadingReplyList, setLoadingReplyList] = useState([]);
+    // 回复列表数据源
+    const [replyList, setReplyList] = useState<LoadingPostCommentReplyVO[]>(initCommentReplyList);
+    // 回复列表是否加载中
+    const [replyListLoading, setReplyListLoading] = useState<boolean>(false);
+    // 回复搜索参数
+    const [replySearchParams, setReplySearchParams] = useState<ReplySearchParams>(DEFAULT_PAGE_PARAMS);
+    // 是否显示更多回复
+    const [showMoreReply, setShowMoreReply] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (showMoreReply) {
+            loadDataReplyList();
+            setShowMoreReply(false);
+        }
+    }, [replySearchParams, showMoreReply]);
+
+    /**
+     * 加载更多数据 current + 1
+     */
+    const loadMoreData = () => {
+        setShowMoreReply(true);
+        setReplySearchParams(prev => {
+            return {
+                ...prev,
+                current: prev.current + 1
+            }
+        });
+    }
+
+    /**
+     * 加载数据
+     */
+    const loadDataReplyList = async () => {
+        setReplyListLoading(true);
+        const loadingItems = new Array(DEFAULT_SHOW_REPLY_NUM).fill({ loading: true, name: {}, picture: {} });
+        setReplyList(
+            replyList.length === DEFAULT_SHOW_REPLY_NUM
+                ? [...replyList, ...loadingReplyList, ...loadingItems]
+                : [...loadingReplyList, ...loadingItems]
+        );
+        try {
+            const query = {
+                ...replySearchParams,
+                commentId: comment.id as unknown as number,
+            };
+            const res = await listPostCommentReplyVoByPageUsingPost(query);
+            const newData = replyList.length === DEFAULT_SHOW_REPLY_NUM
+                ? [...initCommentReplyList, ...loadingReplyList, ...res.data.records]
+                : [...loadingReplyList, ...res.data.records];
+            setLoadingReplyList(newData);
+            setReplyList(newData);
+
+        } catch (error: any) {
+            message.error('加载失败' + error.message);
+        }
+        setReplyListLoading(false);
+    }
 
     /**
      * 加载更多视图
      */
     const loadMoreView = () => {
         // 剩余数量
-        const replyRemainNum = Number(loadCommentCurrent?.replyTotal || 0) - Number(loadCommentCurrent?.replyList?.length || 0);
+        const replyRemainNum = Number(comment?.replyPage.total || 0) - Number(replyList.length || 0);
 
-        if ((replyRemainNum > 0 && loadCommentCurrent.comment.id !== loadingMoreId)) {
+        if ((replyRemainNum > 0)) {
             return (
                 <Button type="text" size="small" className="get-all-btn"
-                    onClick={() => {
-                        loadMoreDataReplyMore(loadCommentCurrent.comment.id)
-                    }}>
+                    onClick={loadMoreData}>
                     <div className="flex-box"><span>查看全部{replyRemainNum}条回复</span><DownOutlined /></div>
                 </Button>
             )
@@ -54,15 +126,15 @@ const CommentReplyList: React.FC<Props> = React.memo((props) => {
     /**
      * 回复视图
      */
-    const renderReplyView = (childItem: LoadPostCommentReplyVO) => {
+    const renderReplyView = (childItem: API.PostCommentReplyVO) => {
         if (childItem.replyId) {
             return (
                 <>
                     <span className="rep">回复</span>
-                    <Link href={`/user/${childItem.replyUserId}`} target="_blank" >
+                    <UserInfoCardPopover userInfo={childItem.replyUser}>
                         <span>@{childItem.replyUser?.userName}</span>
-                    </Link>
-                    {childItem.replyUserId === loginUser.id && <AuthorTag />}
+                    </UserInfoCardPopover>
+                    {childItem.replyUserId === post.userId && <AuthorTag />}
                 </>
             )
         }
@@ -75,44 +147,35 @@ const CommentReplyList: React.FC<Props> = React.memo((props) => {
                 className="comment-list"
                 itemLayout="vertical"
                 size="large"
-                // loading={loadCommentCurrent.comment.id === loadingMoreId}
                 locale={{ emptyText: <></> }}
                 loadMore={loadMoreView()}
-                dataSource={loadCommentCurrent?.replyList}
+                loading={replyListLoading}
+                dataSource={replyList}
                 renderItem={(childItem, childIndex) => (
                     <div>
                         <List.Item key={childIndex}>
                             <Skeleton avatar title={false} loading={childItem.loading} active>
                                 <div className="top-content">
                                     <div className="avatar">
-                                        <Link href={`/user/${childItem.userId}`} target="_blank" style={{ display: 'inline-block' }}>
-                                            <UserPopoverSection userInfo={childItem.user || null}>
-                                                <Avatar src={childItem.user?.userAvatar} size={28} />
-                                            </UserPopoverSection>
-                                        </Link>
+                                        <UserInfoCardPopover userInfo={childItem.user}>
+                                            <Avatar src={childItem.user?.userAvatar || DEFAULT_AVATAR} size={28} />
+                                        </UserInfoCardPopover>
                                     </div>
                                     <div className="other">
                                         <Space size="small">
-                                            <Link href={`/user/${childItem.userId}`} target="_blank" >
+                                            <UserInfoCardPopover userInfo={childItem.user}>
                                                 <span className="user-name" style={{ fontSize: 16 }}>{childItem.user?.userName}</span>
-                                            </Link>
-                                            {childItem.userId === loginUser.id && <AuthorTag />}
+                                            </UserInfoCardPopover>
+                                            {childItem.userId === post.userId && <AuthorTag />}
                                             {renderReplyView(childItem)}
                                         </Space>
                                         <span className="reply-content" dangerouslySetInnerHTML={{ __html: ": " + childItem.content }} />
                                         {/* <MdViewer value={childItem.content} /> */}
                                     </div>
                                 </div>
-                                <CommentActions loadCommentCurrent={loadCommentCurrent} loadReplyCurrent={childItem} />
+                                <CommentActions comment={comment} reply={childItem} loadDataReplyList={loadDataReplyList} />
                             </Skeleton>
                         </List.Item>
-                        {/* 因添加骨架loading 点击加载更多时 临时额外加了一个loading的对象，导致无论函数中判断什么都没效果， 所以使用时需加个判断，当前行(对象)中是否包含loading属性来控制显示 */}
-                        {/* {!childItem.loading && replyCommentView(childItem.id)} */}
-                        {
-                            (!childItem.loading && childItem.isCurrentAddCommentShow) && (
-                                <AddReplyComment loadCommentCurrent={loadCommentCurrent} loadReplyCurrent={childItem} />
-                            )
-                        }
                     </div>
                 )}
             />

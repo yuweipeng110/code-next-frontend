@@ -30,7 +30,7 @@ const BadgeFloatButton: React.FC<{ icon: React.ReactElement, tooltip: string, ba
  * 2.2个 接口调用（点赞、收藏）
  * 3.悬浮框3个按钮的功能
  */
-const PostFloatButton: React.FC<Props> = (props) => {
+const PostFloatButton: React.FC<Props> = React.memo((props) => {
     const { postObject, immerse, setImmerse } = props;
 
     const defalutColor = "#8a919f";
@@ -94,6 +94,6 @@ const PostFloatButton: React.FC<Props> = (props) => {
             {immerseFloatButton()}
         </FloatButton.Group>
     )
-}
+})
 
 export default PostFloatButton;

@@ -1,5 +1,7 @@
 "use client"
-import { Button } from 'antd';
+import { listPostVoByPageUsingPost } from '@/api/postCommentController';
+import { Button, List, message } from 'antd';
+import TextArea from 'antd/es/input/TextArea';
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
 
@@ -48,28 +50,61 @@ type ChildProps = {
     replyItem?: Reply;
     handleListItemShow?: (commentId: number, replyId?: number) => void;
 }
+type CommentActionsProps = {
+    comment: Object;
+    reply?: Object;
+    handleShowCommentInput?: (showInput: boolean) => void;
+    handleShowReplyInput?: (showInput: boolean) => void;
+    handleShowCommentInputList?: (id: number) => void;
+    handleShowReplyInputList?: (id: number) => void;
+}
+
 // 子组件
-const CommentActions: React.FC<ChildProps> = React.memo((props) => {
-    const { item, replyItem, handleListItemShow } = props;
+const CommentActions: React.FC<CommentActionsProps> = React.memo((props) => {
+    // const { item, replyItem, handleListItemShow } = props;
+    const { comment, reply, handleShowCommentInput, handleShowReplyInput, handleShowCommentInputList, handleShowReplyInputList } = props;
     // const { item, replyItem } = props;
     // const { handleListItemShow } = useContext(CommentReplyProvider);
     // console.log('render CommentActions')
 
+    const [showInput, setShowInput] = useState(false);
+
     return (
         <div>
-            CommentActions
-            itemId: {item.id}
-            <Button type="primary"
-                onClick={() => {
-                    if (replyItem) {
-                        handleListItemShow(item.id, replyItem.id);
-                    } else {
-                        handleListItemShow(item.id)
-                    }
-                }}
-            >
-                {replyItem ? replyItem.isCurrentAddCommentShow ? "打开" : "关闭" : item.isCurrentAddCommentShow ? "open" : "close"}
-            </Button>
+            <div>
+                CommentActions
+                itemId: {comment.id}
+                <Button type="primary"
+                    onClick={() => {
+                        if (reply) {
+                            handleShowReplyInput(true);
+                            // replyListRef?.current?.setReplyInputState(true, '', '');
+                            // setReplyInputState(item.id, replyItem.id);
+                            handleShowReplyInputList(reply.id);
+                            setShowInput(!showInput);
+                        } else {
+                            // handleListItemShow(item.id)
+                            // commentList.setCommentInputState();
+                            handleShowCommentInput(true);
+                            handleShowCommentInputList(comment.id);
+                            setShowInput(!showInput);
+                        }
+                    }}
+                >
+                    {/* {replyItem ? replyItem.isCurrentAddCommentShow ? "打开" : "关闭" : item.isCurrentAddCommentShow ? "open" : "close"} */}
+                    回复
+                </Button>
+            </div>
+            {showInput && (
+                <div>
+                    AddReplyComment
+                    <TextArea
+                        rows={4}
+                        maxLength={600}
+                        showCount
+                    />
+                </div>
+            )}
         </div>
     );
 })
@@ -79,32 +114,54 @@ const AddReplyComment = React.memo(() => {
     console.log('render AddReplyComment');
 
     return (
-        <div>AddReplyComment</div>
+        <div>
+            AddReplyComment
+            <TextArea
+                rows={4}
+                maxLength={600}
+                showCount
+            />
+        </div>
     );
 });
 
 // 子组件
-const CommentReplyList: React.FC<ChildProps> = React.memo((props) => {
+const CommentReplyList: React.FC<{ comment: Object }> = React.memo((props) => {
     // const { item, handleListItemShow } = props;
-    const { item, handleListItemShow = () => { } } = props;
+    const { comment } = props;
     // const { handleListItemShow } = useContext(CommentReplyProvider);
-    console.log('render CommentReplyList', item);
+    console.log('render CommentReplyList', comment);
+    const [showReplyInput, setShowReplyInput] = useState(false);
+    const [showReplyInputList, setShowReplyInputList] = useState([]);
+    const handleShowReplyInput = (showInput: boolean) => {
+        // setShowReplyInput(showInput);
+        setShowReplyInput(!showReplyInput);
+    }
+    const handleShowReplyInputList = (id: number) => {
+        setShowReplyInputList(prevList =>
+            prevList.includes(id)
+                ? prevList.filter(item => item !== id)  // 如果已存在，删除
+                : [...prevList, id]                      // 如果不存在，添加
+        );
+    }
 
     return (
         <div>
             <p>
                 CommentReplyList
-                replyList: {item.replyList.map((replyItem, index) => {
+                replyList: {comment.replyPage.records.map((replyItem, index) => {
+                    const hasShowReplyInput = new Set(showReplyInputList).has(replyItem.id);
                     return (
-                        <div key={index}>
-                            <CommentActions item={item} replyItem={replyItem} handleListItemShow={handleListItemShow} />
-                            {(replyItem.isCurrentAddCommentShow).toString()}
-                            {
-                                replyItem.isCurrentAddCommentShow && <AddReplyComment />
-                            }
+                        <div key={index} style={{ background: "green" }}>
+                            <CommentActions comment={comment} reply={replyItem} handleShowReplyInput={handleShowReplyInput} handleShowReplyInputList={handleShowReplyInputList} />
+                            {/* {   hasShowReplyInput && <AddReplyComment />} */}
                         </div>
                     )
                 })}
+                {
+                    // showReplyInput && <AddReplyComment />
+                    // showReplyInput && <AddReplyComment />
+                }
             </p>
         </div>
     );
@@ -114,72 +171,76 @@ const CommentReplyList: React.FC<ChildProps> = React.memo((props) => {
 const ParentComponent = () => {
     console.log('render ParentComponent');
 
-    const [list, setList] = useState<ListProps[]>([]);
+    const [list, setList] = useState<[]>([]);
+    const [showCommentInput, setShowCommentInput] = useState(false);
+    const [showCommentInputList, setShowCommentInputList] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const initSearchParams = {
+        pageSize: 8,
+        pageNum: 1,
+        orderKey: 'thumbNum',
+    };
 
+    const [searchParams, setSearchParams] = useState(initSearchParams);
+    const [total, setTotal] = useState<number>(0);
 
-    // 调整数据结构
+    /**
+     * 加载数据
+     */
+    const loadData = async () => {
+        setLoading(true);
+        const res = await listPostVoByPageUsingPost({
+            postId: "1843471468667645954" as unknown as number,
+            ...searchParams,
+        });
+        if (res) {
+            // const dataList = res.data?.records || [];
+            // const total = res.data?.total || 0;
+            setList(res.data?.records || []);
+            setTotal(res.data?.total);
+        } else {
+            message.error('加载失败，请刷新重试');
+        }
+        setLoading(false);
+    };
+
     useEffect(() => {
-        const updatedList = defaultData.map(item => ({
-            id: item.id,
-            replyList: (item.replyPage.records || []).map(record => ({
-                ...record,
-                isCurrentAddCommentShow: false,
-                contentIsHasValue: false,
-            })),
-            replyTotal: item.replyPage.total || 0,
-            isCurrentAddCommentShow: false,
-            contentIsHasValue: false,
-        }));
-        setList(updatedList);
-    }, []);
+        loadData();
+    }, [searchParams]);
+
+    const handleShowCommentInput = (showInput: boolean) => {
+        setShowCommentInput(!showCommentInput);
+    }
+    const handleShowCommentInputList = (id: number) => {
+        setShowCommentInputList(prevList =>
+            prevList.includes(id)
+                ? prevList.filter(item => item !== id)  // 如果已存在，删除
+                : [...prevList, id]                      // 如果不存在，添加
+        );
+    }
+
+
+    useEffect(() => {
+        console.log('showCommentInputList', showCommentInputList);
+    }, [showCommentInputList]);
 
     useEffect(() => {
         console.log('list', list);
     }, [list]);
 
-    const handleListItemShow = useCallback((commentId: number, replyId?: number) => {
-        console.log('handleListItemShow', commentId, replyId);
-        const newReplyMoreDataList = list.map(commentItem => {
-            if (commentItem.id === commentId) {
-                if (replyId) {
-                    // 更新回复列表中指定回复的可见状态
-                    commentItem.replyList = commentItem.replyList.map(replyItem => {
-                        if (replyItem.id === replyId) {
-                            return {
-                                ...replyItem,
-                                isCurrentAddCommentShow: !replyItem.isCurrentAddCommentShow,
-                            };
-                        }
-                        return replyItem;
-                    });
-                } else {
-                    // 更新评论的可见状态
-                    return { ...commentItem, isCurrentAddCommentShow: !commentItem.isCurrentAddCommentShow };
-                }
-            }
-            return commentItem;
-        });
-        setList(newReplyMoreDataList);
-    }, [list])
-
     return (
         <div>
             <p>ParentComponent</p>
 
-            list: {list.map((item, index) => {
+            {/* list: {list.map((commentItem, index) => {
+                const hasShowCommentInput = new Set(showCommentInputList).has(commentItem.id);
                 return (
                     <div key={index}>
-                        <CommentActions item={item} handleListItemShow={handleListItemShow} />
-                        {/* <CommentReplyProvider.Provider value={{ handleListItemShow }}>
-                            <CommentActions item={item} />
-                        </CommentReplyProvider.Provider> */}
+                        <CommentActions comment={commentItem} handleShowCommentInput={handleShowCommentInput} handleShowCommentInputList={handleShowCommentInputList} />
+                        {(hasShowCommentInput) && <AddReplyComment />}
                         {
-                            item.isCurrentAddCommentShow && <AddReplyComment />
-                        }
-                        {
-                            item.replyTotal > 0 && (
-
-                                <CommentReplyList item={item} handleListItemShow={handleListItemShow} />
+                            commentItem.replyPage?.total > 0 && (
+                                <CommentReplyList comment={commentItem} />
                                 // <CommentReplyProvider.Provider value={{ handleListItemShow }}>
                                 //     <CommentReplyList item={item} />
                                 // </CommentReplyProvider.Provider>
@@ -187,7 +248,50 @@ const ParentComponent = () => {
                         }
                     </div>
                 )
-            })}
+            })} */}
+
+
+
+            <List
+                itemLayout="vertical"
+                dataSource={list}
+                loading={loading}
+                renderItem={(commentItem, commentIndex) => {
+                    const hasShowCommentInput = new Set(showCommentInputList).has(commentItem.id);
+                    return (
+                        <div key={commentIndex}>
+                            <CommentActions comment={commentItem} handleShowCommentInput={handleShowCommentInput} handleShowCommentInputList={handleShowCommentInputList} />
+                            {/* {(hasShowCommentInput) && <AddReplyComment />} */}
+                            {
+                                commentItem.replyPage?.total > 0 && (
+                                    <CommentReplyList comment={commentItem} />
+                                )
+                            }
+                        </div>
+                    );
+                }}
+                pagination={{
+                    pageSize: searchParams.pageSize ?? 8,
+                    current: searchParams.pageNum ?? 1,
+                    showSizeChanger: false,
+                    total,
+                    showTotal() {
+                        return `总数 ${total ?? 0}`;
+                    },
+                    onChange(pageNum, pageSize) {
+                        const params = {
+                            ...searchParams,
+                            pageSize,
+                            pageNum,
+                        };
+                        setSearchParams(params);
+                        // // 回到回答区顶部
+                        // if (topRef?.current) {
+                        //     window.scrollTo(0, topRef.current.offsetTop);
+                        // }
+                    },
+                }}
+            />
         </div>
     );
 };

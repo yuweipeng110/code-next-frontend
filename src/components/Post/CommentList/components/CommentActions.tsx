@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
-import { Dropdown, Flex, Space } from 'antd';
-import { DeleteOutlined, EllipsisOutlined, LikeFilled, LikeOutlined, MessageFilled, MessageOutlined, WarningOutlined } from '@ant-design/icons';
-import { LoadPostCommentReplyVO, LoadPostCommentVO } from '../type';
+import React, { useCallback, useState } from 'react';
+import { Dropdown, Flex, message, Modal, Space } from 'antd';
+import { DeleteOutlined, EllipsisOutlined, ExclamationCircleOutlined, LikeFilled, LikeOutlined, MessageFilled, MessageOutlined, WarningOutlined } from '@ant-design/icons';
 import { formatTime } from '@/utils/date';
-import { CommentReplyEditProvider } from '../CommentContext';
+import AddReplyComment from './AddReplyComment';
 
 const IconText = ({ icon, text, onClick, className }: { icon: React.FC; text: string, onClick?: (event: any) => void, className?: string }) => (
     <Space onClick={onClick} className={`hoverable-icon ${className}`}>
@@ -13,65 +12,46 @@ const IconText = ({ icon, text, onClick, className }: { icon: React.FC; text: st
 );
 
 type Props = {
-    // 加工评论对象
-    loadCommentCurrent: LoadPostCommentVO;
-    // 加工评论回复对象（可选）
-    loadReplyCurrent?: LoadPostCommentReplyVO;
+    // 评论对象
+    comment: API.PostCommentVO;
+    // 回复对象（可选）
+    reply?: API.PostCommentReplyVO;
+    // 加载评论数据
+    loadDataCommentList?: () => void;
+    // 加载评论回复数据
+    loadDataReplyList?: () => void;
 }
 
 /**
  * 评论操作区
  */
 const CommentActions: React.FC<Props> = React.memo((props) => {
-    // const { commentCurrent, replyMoreDataList, setReplyMoreDataList, replyCurrent } = props;
-    const { loadCommentCurrent, loadReplyCurrent } = props;
-    const commentCurrent = loadCommentCurrent.comment;
-    const { toggleCurrentCommentReplyVisibility } = useContext(CommentReplyEditProvider);
+    const { comment, reply, loadDataCommentList, loadDataReplyList } = props;
+
+    const [showInput, setShowInput] = useState<boolean>(false);
 
     /**
      * 获取评论或回复的文本
-     * @param comment 评论对象
      * @returns 评论或回复的文本
      */
-    const getReplyText = (comment: API.PostCommentVO) => {
-        if (!loadReplyCurrent) {
-            return comment.replyPage.total > 0 ? comment.replyPage.total.toString() : "评论";
+    const getReplyText = () => {
+        if (reply) {
+            return "回复";
         }
-        return "回复";
-    };
+        return comment.replyPage.total > 0 ? comment.replyPage.total.toString() : "评论";
+    }
 
     /**
      * 评论回复功能视图
      */
     const commentReplyActionView = () => {
-        /**
-         * 检查评论或回复是否可见
-         * @param commentId 评论ID
-         * @param replyId 回复ID（可选）
-         * @returns 是否可见
-         */
-        const isReplyVisible = () => {
-            if (loadReplyCurrent) {
-                // 检查回复列表中指定回复是否可见
-                return loadReplyCurrent.isCurrentAddCommentShow;
-                // return replyMoreDataList.find(commentItem => commentItem.id === commentId)?.replyList.find(replyItem => replyItem.id === replyId && replyItem.isCurrentAddCommentShow);
-            }
-            // 检查评论是否可见
-            return loadCommentCurrent.isCurrentAddCommentShow;
-            // return replyMoreDataList.find(commentItem => commentItem.id === commentId && commentItem.isCurrentAddCommentShow);
-        };
-
-        const isVisible = isReplyVisible();
-
         const iconPropsInit = {
             onClick: () => {
-                const commentId = commentCurrent.id;
-                const replyId = loadReplyCurrent?.id;
-                toggleCurrentCommentReplyVisibility(commentId, replyId)
+                setShowInput(!showInput);
             },
         }
 
-        const iconProps = isVisible
+        const iconProps = showInput
             ? {
                 icon: MessageFilled,
                 text: "取消回复",
@@ -80,20 +60,20 @@ const CommentActions: React.FC<Props> = React.memo((props) => {
             }
             : {
                 icon: MessageOutlined,
-                text: getReplyText(commentCurrent),
+                text: getReplyText(),
                 ...iconPropsInit,
             };
 
         return <IconText key="list-vertical-message" {...iconProps} />;
-    };
+    }
 
     /**
      * 评论回复点赞功能view
      */
     const commentReplyThumbView = () => {
-        const thumbNum = loadReplyCurrent ? loadReplyCurrent.thumbNum : commentCurrent.thumbNum;
+        const thumbNum = reply ? reply.thumbNum : comment.thumbNum;
         const text = thumbNum === 0 ? "点赞" : thumbNum.toString();
-        const hasThumb = loadReplyCurrent ? loadReplyCurrent.hasThumb : commentCurrent.hasThumb;
+        const hasThumb = reply ? reply.hasThumb : comment.hasThumb;
 
         const iconProps = {
             text,
@@ -104,42 +84,65 @@ const CommentActions: React.FC<Props> = React.memo((props) => {
         return <IconText key="list-vertical-like" {...iconProps} />;
     }
 
+    /**
+     * 评论回复时间
+     */
+    const commentReplyTimeView = () => {
+        return reply ? formatTime(reply.createTime) : formatTime(comment.createTime);
+    }
+
+    const handleShowInput = useCallback((isShow: boolean) => {
+        setShowInput(isShow);
+    }, [])
+
     return (
-        <Flex justify='space-between' className="comment-actions">
-            <Flex>
-                <div className="comment-action-item">
-                    {formatTime(commentCurrent.createTime)}
-                    <em className="ant-list-item-action-split" />
-                </div>
-                <div className="comment-action-item">
-                    {commentReplyThumbView()}
-                    <em className="ant-list-item-action-split" />
-                </div>
-                <div className="comment-action-item" >
-                    {commentReplyActionView()}
-                </div>
+        <div>
+            <Flex justify='space-between' className="comment-actions">
+                <Flex>
+                    <div className="comment-action-item">
+                        {commentReplyTimeView()}
+                        <em className="ant-list-item-action-split" />
+                    </div>
+                    <div className="comment-action-item">
+                        {commentReplyThumbView()}
+                        <em className="ant-list-item-action-split" />
+                    </div>
+                    <div className="comment-action-item" >
+                        {commentReplyActionView()}
+                    </div>
+                </Flex>
+                <Dropdown
+                    placement="bottomRight"
+                    trigger={['click']}
+                    menu={{
+                        items: [
+                            {
+                                key: 'commentDelete',
+                                icon: <DeleteOutlined />,
+                                label: '删除',
+                                danger: true,
+                                onClick: () =>
+                                    Modal.confirm({
+                                        icon: <ExclamationCircleOutlined />,
+                                        content: '是否确认删除？不可找回',
+                                        onOk() {
+                                            message.success("删除成功");
+                                        },
+                                    })
+                            },
+                            {
+                                key: 'commentReport',
+                                icon: <WarningOutlined />,
+                                label: "举报",
+                            },
+                        ]
+                    }}
+                >
+                    <EllipsisOutlined style={{ cursor: "pointer" }} />
+                </Dropdown>
             </Flex>
-            <Dropdown
-                placement="bottomRight"
-                menu={{
-                    items: [
-                        {
-                            key: 'commentDelete',
-                            icon: <DeleteOutlined />,
-                            label: '删除',
-                            danger: true,
-                        },
-                        {
-                            key: 'commentReport',
-                            icon: <WarningOutlined />,
-                            label: "举报",
-                        },
-                    ]
-                }}
-            >
-                <EllipsisOutlined style={{ cursor: "pointer" }} />
-            </Dropdown>
-        </Flex>
+            {showInput && <AddReplyComment comment={comment} reply={reply} handleShowInput={handleShowInput} />}
+        </div>
     )
 })
 

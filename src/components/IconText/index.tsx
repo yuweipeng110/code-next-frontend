@@ -9,7 +9,7 @@ type Props = {
     actionColor?: string;
 }
 
-const IconText: React.FC<Props> = (props) => {
+const IconText: React.FC<Props> = React.memo((props) => {
     let { icon, text, defalutColor, actionIcon, actionColor } = props;
 
     actionColor = actionColor || "#1677ff";
@@ -24,6 +24,6 @@ const IconText: React.FC<Props> = (props) => {
             {text}
         </Space>
     )
-}
+})
 
 export default IconText;

@@ -13,7 +13,7 @@ type Props = {
  * @param props 
  * @returns 
  */
-const PostCardListSection: React.FC<Props> = (props) => {
+const PostCardListSection: React.FC<Props> = React.memo((props) => {
     const { data, title = "", loading = true } = props;
 
     return (
@@ -46,6 +46,6 @@ const PostCardListSection: React.FC<Props> = (props) => {
             </Card>
         </div>
     )
-}
+})
 
 export default PostCardListSection;

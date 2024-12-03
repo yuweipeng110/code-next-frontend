@@ -11,7 +11,7 @@ type Props = {
  * 用户卡片 Card
  * @returns 
  */
-const UserCardSection: React.FC<Props> = (props) => {
+const UserCardSection: React.FC<Props> = React.memo((props) => {
     const { userObject, userLoading } = props;
 
     return (
@@ -48,6 +48,6 @@ const UserCardSection: React.FC<Props> = (props) => {
             </Row>
         </Card>
     )
-}
+})
 
 export default UserCardSection;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dropdown, FloatButton, MenuProps, Popover } from 'antd';
-import { EditTwoTone, EllipsisOutlined, SmileOutlined } from '@ant-design/icons';
+import { EditTwoTone, EllipsisOutlined, MessageTwoTone, SmileOutlined } from '@ant-design/icons';
 
 /**
  * 悬浮按钮
@@ -40,7 +40,7 @@ const SuspensionPanel = React.memo(() => {
     return (
         <FloatButton.Group shape="circle">
             <Popover placement="left" content="建议反馈">
-                <FloatButton icon={<EditTwoTone />} />
+                <FloatButton icon={<MessageTwoTone />} />
             </Popover>
             <Dropdown menu={{ items }} placement="topRight" arrow={{ pointAtCenter: true }}>
                 <FloatButton icon={<EllipsisOutlined />} />

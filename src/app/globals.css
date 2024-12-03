@@ -15,7 +15,8 @@ body {
 
 body {
   word-break: break-word;
-  background: #f2f3f5;
+  /* TODO */
+  /* background: #f2f3f5; */
 }
 
 a:hover {
@@ -78,8 +79,8 @@ a:hover {
 }
 
 .im-btn {
-  border: 1px solid #b3d5ff !important;
-  background-color: #f3f9ff !important;
+  border: 1px solid rgba(30, 128, 255, 0.3) !important;
+  background-color: rgba(30, 128, 255, 0.05) !important;
   color: #1e80ff !important;
 
   &:hover {
@@ -94,4 +95,214 @@ a:hover {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   line-clamp: 3;
+}
+
+
+
+.light-theme,
+body {
+  --code-layer-golden-1: #faf3e5;
+  --code-layer-golden-2: #f6e7cb;
+  --code-component-hover: #e4e6eb;
+  --code-gradientgold_normal_start: #fde8c3;
+  --code-gradientgold_normal_end: #edd3a7;
+  --code-gradientgold_hover_start: #f1dfc0;
+  --code-gradientgold_hover_end: #e6c99b;
+  --code-gradientgold_click_start: #e9d5b3;
+  --code-gradientgold_click_end: #dac29a;
+  --code-layer_loading_start: rgba(228, 230, 235, 0);
+  --code-layer_loading_end: rgba(228, 230, 235, 0.5);
+  --code-layer_golden_2: #faf3e5;
+  --code-font_golden_4: #7e5d25;
+  --code-font-golden-1: #7e5d25;
+  --code-font-golden-2: #8a795c;
+  --code-font-golden-3: #d6b885;
+  --code-gray-0: #fff;
+  --code-gray-1-1: #e4e6eb;
+  --code-gray-1-2: rgba(228, 230, 235, 0.5);
+  --code-gray-1-3: #e4e6eb;
+  --code-gray-2: #f2f3f5;
+  --code-gray-3: #f7f8fa;
+  --code-background: #f2f3f5;
+  --code-layer-1: #fff;
+  --code-layer-2-1: #f7f8fa;
+  --code-layer-2-2: rgba(247, 248, 250, 0.7);
+  --code-layer-3-fill: #f2f3f5;
+  --code-layer-3-border: #e4e6eb;
+  --code-layer-4-dropdown: #fff;
+  --code-layer-5: #fff;
+  --code-brand-1-normal: #1e80ff;
+  --code-brand-2-hover: #1171ee;
+  --code-brand-3-click: #0060dd;
+  --code-brand-4-disable: #abcdff;
+  --code-brand-5-light: #eaf2ff;
+  --code-mask-1: rgba(0, 0, 0, 0.4);
+  --code-mask-2: #fff;
+  --code-mask-3: none;
+  --code-brand-fill1-normal: rgba(30, 128, 255, 0.05);
+  --code-brand-fill2-hover: rgba(30, 128, 255, 0.1);
+  --code-brand-fill3-click: rgba(30, 128, 255, 0.2);
+  --code-brand-stroke1-normal: rgba(30, 128, 255, 0.3);
+  --code-brand-stroke2-hover: rgba(30, 128, 255, 0.45);
+  --code-brand-stroke3-click: rgba(30, 128, 255, 0.6);
+  --code-font_danger: #ff5132;
+  --code-font-1: #252933;
+  --code-font-2: #515767;
+  --code-font-3: #8a919f;
+  --code-font-4: #c2c8d1;
+  --code-font-brand1-normal: #1e80ff;
+  --code-font-brand2-hover: #1171ee;
+  --code-font-brand3-click: #0060dd;
+  --code-font-brand4-disable: #abcdff;
+  --code-font-success: #2bb91b;
+  --code-font-warning: #ff8412;
+  --code-font-danger: #ff5132;
+  --code-font-white-disable: #fff;
+  --code-font-white: #fff;
+  --code-success-1-normal: #00b453;
+  --code-success-2-deep: #00964e;
+  --code-success-3-light: #e2faed;
+  --code-warning-1-normal: #ff7426;
+  --code-warning-2-deep: #e05e00;
+  --code-warning-3-light: #fff3e5;
+  --code-danger-1-normal: #f64242;
+  --code-danger-2-deep: #cb2634;
+  --code-danger-3-light: #fff2ff;
+  --code-sub-1-purple: #9f54ff;
+  --code-sub-2-blue: #57a0ff;
+  --code-sub-3-cyan: #5ad7ff;
+  --code-sub-4-green: #33d790;
+  --code-sub-5-yellow: #ffcc15;
+  --code-sub-6-orange: #ff834e;
+  --code-sub-7-red: #ff5e54;
+  --code-coupon_1_button: #f64242;
+  --code-coupon_1_button_disable: #faa0a0;
+  --code-coupon_2_card: rgba(255, 245, 244, 0.7);
+  --code-coupon_3_stroke: rgba(246, 66, 66, 0.2);
+  --code-navigation: #fff;
+  --code-shade-1: rgba(0, 0, 0, 0.4);
+  --code-shade-2: rgba(0, 0, 0, 0.6);
+  --code-popup: #fff;
+  --code-popover: #464646;
+  --code-sheets: #f7f8fa;
+  --code-coupon-button: #f64242;
+  --code-coupon-button-disable: #faa0a0;
+  --code-coupon-card: rgba(255, 245, 244, 0.7);
+  --code-layer-loading-start: #e4e6eb;
+  --code-layer-loading-end: rgba(228, 230, 235, 0.5);
+  --code-font-priv-hint: #916be1;
+  --code-background-jscore-radar: #232323;
+  --code-button-shadow-hover: #ddd;
+  --code-bot-icon-side-bg-color: linear-gradient(180deg, #ebf1ff, #fff);
+  --code-bot-card-border-color: #eaedf1;
+  --code-ai-text: #2f2f2f;
+  --code-ai-normal-text: #0c0d0e;
+  --code-ai-text-desc: #9299a7;
+  --code-ai-message-bgc: #fff;
+  --code-ai-button-bgc: #fff;
+  --code-ai-code-bgc: #f7f8f9
+}
+
+.dark-theme,
+body[data-theme=dark] {
+  --code-layer-golden-1: rgba(209, 171, 97, 0.23);
+  --code-layer-golden-2: rgba(237, 211, 167, 0.4);
+  --code-component-hover: hsla(0, 0%, 100%, 0.2);
+  --code-gradientgold_normal_start: #fde8c3;
+  --code-gradientgold_normal_end: #edd3a7;
+  --code-gradientgold_hover_start: #f1dfc0;
+  --code-gradientgold_hover_end: #e6c99b;
+  --code-gradientgold_click_start: #e9d5b3;
+  --code-gradientgold_click_end: #dac29a;
+  --code-layer_loading_start: hsla(0, 0%, 100%, 0);
+  --code-layer_loading_end: hsla(0, 0%, 100%, 0.2);
+  --code-layer_golden_2: rgba(209, 171, 97, 0.12);
+  --code-font_golden_4: #7e5d25;
+  --code-font-golden-1: #edd3a7;
+  --code-font-golden-2: #bea985;
+  --code-font-golden-3: #8e7f64;
+  --code-gray-0: #000;
+  --code-gray-1-1: hsla(0, 0%, 100%, 0.2);
+  --code-gray-1-2: hsla(0, 0%, 100%, 0.1);
+  --code-gray-1-3: #464646;
+  --code-gray-2: hsla(0, 0%, 100%, 0.12);
+  --code-gray-3: hsla(0, 0%, 100%, 0.08);
+  --code-background: #000;
+  --code-layer-1: #181818;
+  --code-layer-2-1: hsla(0, 0%, 100%, 0.08);
+  --code-layer-2-2: hsla(0, 0%, 100%, 0.08);
+  --code-layer-3-fill: hsla(0, 0%, 100%, 0.08);
+  --code-layer-3-border: hsla(0, 0%, 100%, 0.2);
+  --code-layer-4-dropdown: #2f2f2f;
+  --code-layer-5: hsla(0, 0%, 100%, 0.12);
+  --code-brand-1-normal: #1b73e5;
+  --code-brand-2-hover: #0f66d6;
+  --code-brand-3-click: #0056c7;
+  --code-brand-4-disable: rgba(41, 134, 255, 0.4);
+  --code-brand-5-light: rgba(30, 128, 255, 0.2);
+  --code-mask-1: hsla(0, 0%, 100%, 0.4);
+  --code-mask-2: #282828;
+  --code-mask-3: rgba(0, 0, 0, 0.05);
+  --code-brand-fill1-normal: rgba(41, 134, 255, 0.15);
+  --code-brand-fill2-hover: rgba(20, 115, 237, 0.25);
+  --code-brand-fill3-click: rgba(5, 99, 221, 0.35);
+  --code-brand-stroke1-normal: rgba(41, 134, 255, 0.4);
+  --code-brand-stroke2-hover: rgba(20, 115, 237, 0.6);
+  --code-brand-stroke3-click: rgba(5, 99, 221, 0.6);
+  --code-font_danger: #f85959;
+  --code-font-1: hsla(0, 0%, 100%, 0.8);
+  --code-font-2: hsla(0, 0%, 100%, 0.7);
+  --code-font-3: hsla(0, 0%, 100%, 0.46);
+  --code-font-4: hsla(0, 0%, 100%, 0.45);
+  --code-font-brand1-normal: #4495ff;
+  --code-font-brand2-hover: #2b88ff;
+  --code-font-brand3-click: #1371ec;
+  --code-font-brand4-disable: rgba(19, 113, 236, 0.4);
+  --code-font-success: #40c17b;
+  --code-font-warning: #ff8541;
+  --code-font-danger: #c62633;
+  --code-font-white-disable: hsla(0, 0%, 100%, 0.6);
+  --code-font-white: #fff;
+  --code-success-1-normal: #40c17b;
+  --code-success-2-deep: #008445;
+  --code-success-3-light: rgba(64, 193, 123, 0.2);
+  --code-warning-1-normal: #ff8541;
+  --code-warning-2-deep: #d85c02;
+  --code-warning-3-light: rgba(255, 133, 65, 0.2);
+  --code-danger-1-normal: #f85959;
+  --code-danger-2-deep: #c62633;
+  --code-danger-3-light: rgba(248, 89, 89, 0.2);
+  --code-sub-1-purple: #a965ff;
+  --code-sub-2-blue: #68a9ff;
+  --code-sub-3-cyan: #74f4ed;
+  --code-sub-4-green: #50e68c;
+  --code-sub-5-yellow: #ffd748;
+  --code-sub-6-orange: #ff8f60;
+  --code-sub-7-red: #ff6e65;
+  --code-coupon_1_button: rgba(251, 86, 83, 0.8);
+  --code-coupon_1_button_disable: #782928;
+  --code-coupon_2_card: rgba(255, 176, 176, 0.08);
+  --code-coupon_3_stroke: rgba(246, 66, 66, 0.18);
+  --code-navigation: #181818;
+  --code-shade-1: rgba(0, 0, 0, 0.6);
+  --code-shade-2: rgba(0, 0, 0, 0.7);
+  --code-popup: #282828;
+  --code-popover: #424242;
+  --code-sheets: #222;
+  --code-coupon-button: rgba(251, 86, 83, 0.8);
+  --code-coupon-button-disable: #782928;
+  --code-coupon-card: rgba(255, 176, 176, 0.08);
+  --code-layer-loading-start: hsla(0, 0%, 100%, 0);
+  --code-layer-loading-end: hsla(0, 0%, 100%, 0.2);
+  --code-font-priv-hint: #916be1;
+  --code-background-jscore-radar: #232323;
+  --code-button-shadow-hover: transparent;
+  --code-bot-icon-side-bg-color: var(--code-layer-5);
+  --code-bot-card-border-color: var(--code-gray-1-1);
+  --code-ai-text: hsla(0, 0%, 100%, 0.9);
+  --code-ai-text-desc: hsla(0, 0%, 100%, 0.4);
+  --code-ai-normal-text: hsla(0, 0%, 100%, 0.9);
+  --code-ai-message-bgc: hsla(0, 0%, 100%, 0.08);
+  --code-ai-button-bgc: hsla(0, 0%, 100%, 0.2);
+  --code-ai-code-bgc: hsla(0, 0%, 100%, 0.08)
 }

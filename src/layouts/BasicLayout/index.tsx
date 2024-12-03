@@ -13,6 +13,7 @@ import VipEntry from './components/VipEntry';
 import Notification from './components/Notification';
 import "./index.css";
 import SuspensionPanel from '@/components/SuspensionPanel';
+import { DEFAULT_AVATAR, DEFAULT_USER_NAME } from '@/constants';
 
 type Props = {
     children: React.ReactNode;
@@ -42,6 +43,7 @@ const BasicLayout: React.FC<Props> = ({ children }) => {
                         colorTextMenuSelected: '#1E80FF',
                     },
                 }}
+                theme="dark"
                 title="code-next-frontend"
                 // layout="top"
                 logo={
@@ -55,9 +57,9 @@ const BasicLayout: React.FC<Props> = ({ children }) => {
                     type: 'sub',
                 }}
                 avatarProps={{
-                    src: loginUser.userAvatar || "/assets/logo.png",
+                    src: loginUser.userAvatar || DEFAULT_AVATAR,
                     size: "large",
-                    title: loginUser.userName || "游客",
+                    title: loginUser.userName || DEFAULT_USER_NAME,
                     // src: 'https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg',
                     // size: 'large',
                     // title: '七妮妮',

@@ -1,3 +1,4 @@
+import React from "react";
 import { Tag } from "antd";
 import Link from "next/link";
 import "./index.css";
@@ -11,7 +12,7 @@ interface Props {
  * @param props
  * @constructor
  */
-const TagList = (props: Props) => {
+const TagList = React.memo((props: Props) => {
     const { tagList = [] } = props;
 
     return (
@@ -25,6 +26,6 @@ const TagList = (props: Props) => {
             })}
         </div>
     );
-};
+})
 
 export default TagList;

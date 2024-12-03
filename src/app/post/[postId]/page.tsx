@@ -1,31 +1,18 @@
 "use client";
-import React, { lazy, Suspense, useCallback, useEffect, useState } from 'react';
-import { Affix, Avatar, Button, Flex, FloatButton, Layout, message, Spin } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Affix, Button, Flex, Layout, message } from 'antd';
 import { AnchorLinkItemProps } from 'antd/es/anchor/Anchor';
-import { CaretRightFilled, DeleteOutlined, DoubleLeftOutlined, DoubleRightOutlined, EllipsisOutlined, LikeOutlined, MessageOutlined, MessageTwoTone, QuestionCircleOutlined, SyncOutlined, WarningOutlined } from '@ant-design/icons';
+import { CaretRightFilled, DoubleLeftOutlined, DoubleRightOutlined } from '@ant-design/icons';
 import { generateItemsRecursive } from "@/utils/tool";
-import PostCard from '@/components/Post/Card';
-import { listPostVoByPageUsingPost } from '@/api/postCommentController';
 import { useParams } from 'next/navigation';
 import { getPostVoUsingGet } from '@/api/postController';
+import PostCard from '@/components/Post/Card';
 import PostCommentList from '@/components/Post/CommentList';
-import "./index.css";
 import UserCardSection from '@/components/User/Card';
 import PostCardList from '@/components/Post/Card/PostCardList';
 import PostCardAnchor from '@/components/Post/Card/PostCardAnchor';
 import PostFloatButton from '@/components/Post/PostFloatButton';
-import SuspensionPanel from '@/components/SuspensionPanel';
-
-
-
-type ParamsType = {
-    current: number;
-    pageSize: number;
-    sortField: string;
-    sortOrder: string;
-    searchUserId?: number;
-    postId?: string;
-}
+import "./index.css";
 
 /**
  * 帖子详情
@@ -46,8 +33,6 @@ const PostPage = () => {
 
     /**
      * 加载帖子数据
-     * @param params 搜索参数
-     * @returns 
      */
     const loadDataPost = async () => {
         setPostLoading(true);
@@ -71,7 +56,7 @@ const PostPage = () => {
     React.useEffect(() => {
         if (postObj) {
             const headings = document.querySelectorAll<HTMLElement>(
-                '.markdown-body :where(h2, h3, h4)',
+                '.markdown-body :where(h1, h2, h3, h4)',
             );
             // console.log('tocLinks', tocLinks);
             // console.log('headings', headings);
@@ -83,13 +68,12 @@ const PostPage = () => {
         <div id="post-page" className="max-width-content-1">
             <Flex gap={24}>
                 <Layout.Content>
-                    <div style={{ marginBottom: 16 }} />
-                    {/* <PostCard postObject={postObj} postLoading={postLoading} /> */}
+                    {/* <div style={{ marginBottom: 16 }} />
+                    <PostCard postObject={postObj} postLoading={postLoading} /> */}
                     <div style={{ marginBottom: 16 }} />
                     {
                         Object.keys(postObj).length > 0 && (
-                            // <PostCommentList commentDataList={commentDataList} commentTotal={commentTotal} loadMoreDataCommentList={loadMoreDataCommentList} postCurrent={postObj} />
-                            <PostCommentList postId={postId as string} />
+                            <PostCommentList post={postObj} />
                         )
                     }
                 </Layout.Content>
@@ -111,8 +95,12 @@ const PostPage = () => {
                                 <div style={{ marginBottom: 16 }} />
                                 <Affix offsetTop={60}>
                                     <div>
-                                        <PostCardAnchor anchorItems={anchorItems} />
-                                        <div style={{ marginBottom: 16 }} />
+                                        {anchorItems.length > 0 && (
+                                            <>
+                                                <PostCardAnchor anchorItems={anchorItems} />
+                                                <div style={{ marginBottom: 16 }} />
+                                            </>
+                                        )}
                                         <PostCardList data={[]} title="相关推荐" loading={false} />
                                     </div>
                                 </Affix>

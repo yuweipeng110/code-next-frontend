@@ -10,6 +10,9 @@ import "./globals.css";
 import '../../mock/postCommentList';
 import '../../mock/post';
 import '../../mock/user';
+import { ConfigProvider } from "antd";
+import { ProConfigProvider } from "@ant-design/pro-components";
+import { getTheme } from "@/utils/utils";
 
 /**
  * 全局初始化逻辑
@@ -45,13 +48,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
+  console.log('getTheme', getTheme());
+  // light
+  // dark
+
   return (
     <html lang="zh">
-      <body>
+      <body data-theme={getTheme()}>
         <AntdRegistry>
           <Provider store={store}>
             <InitLayout>
-              <BasicLayout>{children}</BasicLayout>
+              <ProConfigProvider dark={getTheme() === 'dark'}>
+                <BasicLayout>{children}</BasicLayout>
+              </ProConfigProvider>
             </InitLayout>
           </Provider>
         </AntdRegistry>

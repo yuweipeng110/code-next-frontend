@@ -20,13 +20,14 @@ type Props = {
     data: API.TagVO[];
     total: number;
     loadMoreData: () => void;
+    isSubscribed: boolean;
 }
 
 /**
  * 标签卡片
  */
 const TagCard: React.FC<Props> = React.memo((props) => {
-    const { data, total, loadMoreData } = props;
+    const { data, total, loadMoreData, isSubscribed } = props;
 
     const [currentExecuteId, setCurrentExecuteId] = useState<string>("");
     const [followedDataIdList, setFollowedDataIdList] = useState<string[]>([]);
@@ -39,6 +40,10 @@ const TagCard: React.FC<Props> = React.memo((props) => {
             setFollowedDataIdList(data.filter(item => item.follow).map(item => item.id || ""));
         }
     }, [data]);
+
+    useEffect(() => {
+        console.log('useEffect followedDataIdList', followedDataIdList)
+    }, [followedDataIdList])
 
     /**
      * 标签关注/取消
@@ -71,7 +76,8 @@ const TagCard: React.FC<Props> = React.memo((props) => {
      * 获取当前关注数量
      */
     const getCurrentFollowCount = (tagItem: API.TagVO) => {
-        return followedDataIdList.includes(tagItem.id) ? tagItem.followCount : tagItem.followCount - 1;
+        const followChange = isFollowed(tagItem.id) ? (isSubscribed ? -1 : 1) : 0;
+        return tagItem.followCount + followChange;
     }
 
     const cardView = (tagItem: API.TagVO) => {
@@ -107,18 +113,19 @@ const TagCard: React.FC<Props> = React.memo((props) => {
                         >
                             <p>
                                 <Typography.Text>
+                                    {isFollowed(tagItem.id).toString()}
                                     {getCurrentFollowCount(tagItem)} 关注  {tagItem.postCount} 文章
                                 </Typography.Text>
                             </p>
                             {
                                 currentExecuteId === tagItem.id ? (
-                                    <Button className={`subscribe-btn ${isFollowed ? 'subscribed' : ''}`} loading />
+                                    <Button className={`subscribe-btn ${isFollowed(tagItem.id) ? 'subscribed' : ''}`} loading />
                                 ) : (
                                     <Button
-                                        className={`subscribe-btn ${isFollowed ? 'subscribed' : ''}`}
+                                        className={`subscribe-btn ${isFollowed(tagItem.id) ? 'subscribed' : ''}`}
                                         onClick={() => handleTagFollowed(tagItem.id)}
                                     >
-                                        {isFollowed ? '已关注' : '关注'}
+                                        {isFollowed(tagItem.id) ? '已关注' : '关注'}
                                     </Button>
                                 )
                             }

@@ -35,7 +35,9 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-List 结合 react-infinite-scroll-component 实现滚动自动加载列表。 - https://github.com/ankeetmaini/react-infinite-scroll-component
+- React-helmet-async：线程安全的 Helmet 实现 利于 SEO 优化（目的改变 head 中属性） https://github.com/staylor/react-helmet-async
+
+- List 结合 react-infinite-scroll-component 实现滚动自动加载列表。 - https://github.com/ankeetmaini/react-infinite-scroll-component
 
 - Tabs 使用 react-sticky-box 和 renderTabBar 实现吸顶效果。 https://www.npmjs.com/package/react-sticky-box
 

@@ -14,7 +14,7 @@ type Props = {
  * @param props 
  * @returns 
  */
-const AnchorSection: React.FC<Props> = (props) => {
+const AnchorSection: React.FC<Props> = React.memo((props) => {
     const { anchorItems } = props;
 
     // 控制目录card折叠
@@ -40,6 +40,6 @@ const AnchorSection: React.FC<Props> = (props) => {
             <Anchor targetOffset={60} affix={false} replace items={anchorItems} />
         </ProCard>
     )
-}
+})
 
 export default AnchorSection;

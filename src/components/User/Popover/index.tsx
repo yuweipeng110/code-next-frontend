@@ -1,8 +1,9 @@
 import React from 'react';
 import { Avatar, Card, Popover, Space } from 'antd';
 import Link from 'next/link';
-import "./index.css";
 import { DEFAULT_USER } from '@/constants/user';
+import "./index.css";
+import { DEFAULT_AVATAR } from '@/constants';
 
 type Props = {
     userInfo: API.UserVO | null;
@@ -12,23 +13,21 @@ type Props = {
 }>;
 
 /**
- * 用户气泡卡片 Popover 组件
- * @param props 
- * @returns 
+ * 用户卡片悬浮框
  */
-const UserPopoverSection: React.FC<Props> = React.memo((props) => {
+const UserInfoCardPopover: React.FC<Props> = React.memo((props) => {
     const { userInfo = DEFAULT_USER, children } = props;;
     return (
         <Popover overlayClassName="user-info-card-popover" content={(
-            <Card>
-                {/* <img src="http://www.mianshiya.com/assets/svg/user-info-card/userCard.png" className="card-background-image" /> */}
+            <Card className="user-info-card">
+                {/* <img src="http://www.as.com/assets/svg/user-info-card/userCard.png" className="card-background-image" /> */}
                 <div className="card-content">
                     <div className="avatar-container">
                         <div className="user-info-avatar-container">
                             <div className="flex-center" style={{ position: "relative" }}>
                                 <div className="avatar-background"></div>
                                 <Link href="/user/1" target="_blank" >
-                                    <Avatar src={userInfo.userAvatar} size={60} />
+                                    <Avatar src={userInfo.userAvatar || DEFAULT_AVATAR} size={60} />
                                 </Link>
                                 <img alt="VIP标识" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" className="vip-icon mobile" src="/assets/vip.svg" style={{ color: "transparent" }} />
                             </div>
@@ -56,9 +55,11 @@ const UserPopoverSection: React.FC<Props> = React.memo((props) => {
                 </div>
             </Card>
         )}>
-            {children}
+            <Link href={`/user/${userInfo.id}`} className="link-username" target="_blank">
+                {children}
+            </Link>
         </Popover>
     )
 })
 
-export default UserPopoverSection;
+export default UserInfoCardPopover;

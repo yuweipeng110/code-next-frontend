@@ -44,6 +44,7 @@ const TagCardTabs = React.memo(() => {
 
     const [dataList, setDataList] = useState<API.TagVO[]>([]);
     const [total, setTotal] = useState<number>(10);
+    const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
 
     const [searchParams, setSearchParams] = useState<ParamsType>(initParams);
 
@@ -99,6 +100,7 @@ const TagCardTabs = React.memo(() => {
             // setDataList(dataList);
             setDataList((prevData) => [...prevData, ...dataList]);
             setTotal(total);
+            setIsSubscribed(false);
 
         } catch (error: any) {
             message.error('加载失败' + error.message);
@@ -118,6 +120,7 @@ const TagCardTabs = React.memo(() => {
             // setDataList(dataList);
             setDataList((prevData) => [...prevData, ...dataList]);
             setTotal(total);
+            setIsSubscribed(true);
 
         } catch (error: any) {
             message.error('加载失败' + error.message);
@@ -172,6 +175,7 @@ const TagCardTabs = React.memo(() => {
         data: dataList,
         total,
         loadMoreData,
+        isSubscribed
     }
 
     const tagCardTypeList: TabsProps['items'] = [

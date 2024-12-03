@@ -1,13 +1,14 @@
 .tag-list {
     a {
         .ant-tag {
-            /* padding: 2px 8px !important; */
+            padding: 3px 10px !important;
             font-size: inherit !important;
             color: #515767;
 
             &:hover {
                 color: #1677ff;
-                background-color: #eaf2ff;
+                /* background-color: #eaf2ff; */
+                background-color: rgba(30, 128, 255, 0.2);
             }
         }
     }

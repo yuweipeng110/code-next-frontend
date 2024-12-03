@@ -1,4 +1,15 @@
 .comment-card {
+
+    .author-tag {
+        color: var(--code-font-brand1-normal);
+        background: var(--code-brand-5-light);
+        margin-inline-end: 0;
+    }
+
+    .link-username {
+        color: var(--code-font-2);
+    }
+
     .editor-container {
         display: flex;
         align-items: flex-start;
@@ -15,6 +26,22 @@
     .comment-list {
         .ant-list-item {
             padding: 12px 0;
+        }
+
+        .fetch-more-comment {
+            width: 100%;
+            margin-top: 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--code-font-2);
+            font-size: 15px;
+            height: 52px;
+            cursor: pointer;
+            background: var(--code-gray-3);
+            font-weight: 500;
+            transition: all .2s;
         }
 
         .comment-actions {
@@ -40,7 +67,8 @@
                 position: relative;
                 display: inline-block;
                 padding: 0 16px;
-                color: rgba(0, 0, 0, 0.45);
+                /* color: rgba(0, 0, 0, 0.45); */
+                color: var(--code-font-3);
                 font-size: 14px;
                 text-align: center;
 
@@ -63,7 +91,9 @@
         margin-left: 48px;
 
         .get-all-btn {
-            color: rgba(0, 0, 0, 0.3) !important;
+            /* color: rgba(0, 0, 0, 0.3) !important; */
+            /* color: var(--code-font-1); */
+            color: var(--code-font-3);
             padding-left: 8px;
             margin-bottom: 8px;
             margin-top: 8px;
@@ -106,7 +136,8 @@
 
             .reply-content {
                 margin-left: 2px;
-                color: rgba(0, 0, 0, 0.45);
+                /* color: rgba(0, 0, 0, 0.45); */
+                color: var(--code-font-1);
                 font-weight: 400;
                 line-height: 28px
             }

@@ -7,7 +7,7 @@ import { Tag } from 'antd';
 const AuthorTag: React.FC = React.memo(() => {
 
     return (
-        <Tag bordered={false} color="processing" style={{ lineHeight: "18px", paddingInline: 5, fontWeight: "normal" }}>
+        <Tag bordered={false} color="processing" className="author-tag" style={{ lineHeight: "18px", paddingInline: 5, fontWeight: "normal" }}>
             作者
         </Tag>
     )
