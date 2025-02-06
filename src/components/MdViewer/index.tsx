@@ -2,14 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { Viewer } from "@bytemd/react";
 import gfm from "@bytemd/plugin-gfm";
 import highlight from "@bytemd/plugin-highlight";
-import "github-markdown-css/github-markdown-light.css";
-import "bytemd/dist/index.css";
-import "highlight.js/styles/vs.css";
-import "./index.css";
 import gemoji from "@bytemd/plugin-gemoji";
 import mediumZoom from "@bytemd/plugin-medium-zoom";
 import { generateID } from "@/libs/bytemd/plugins/generateID";
 import { Button } from "antd";
+import "github-markdown-css/github-markdown-light.css";
+import "bytemd/dist/index.css";
+import "highlight.js/styles/vs.css";
+import "./index.css";
+import "@/app/bytemd.css";
 
 interface Props {
   value?: string;

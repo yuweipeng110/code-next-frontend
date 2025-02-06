@@ -1,0 +1,22 @@
+.user-setting-security-password {
+    .form-update-password {
+        width: 600px;
+        margin: 0 auto;
+        margin-top: 30px;
+    }
+
+    .process-steps {
+        width: 50%;
+        text-align: center;
+        margin-left: 21%;
+        padding-bottom: 5px;
+
+        .ant-progress {
+            width: 100%
+        }
+
+        .ant-progress .ant-progress-steps-item {
+            width: calc(20% - 2px) !important
+        }
+    }
+}

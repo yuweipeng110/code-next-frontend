@@ -1,11 +1,12 @@
 import React from 'react';
-import { Card, Space, Statistic, Typography } from 'antd';
-import { BarcodeOutlined, EyeOutlined, HistoryOutlined, LikeOutlined, ShareAltOutlined, StarOutlined, LikeFilled, StarFilled } from '@ant-design/icons';
+import { Button, Card, Space, Statistic, Tooltip, Typography } from 'antd';
+import { BarcodeOutlined, EyeOutlined, HistoryOutlined, SoundOutlined } from '@ant-design/icons';
 import MdViewer from '@/components/MdViewer';
-import { formatTime } from '@/utils/date';
 import Link from 'next/link';
 import TagList from '@/components/TagList';
+import moment from 'moment';
 import "./index.css";
+import { getPostSpeakText } from '@/utils/businessUtils';
 
 type Props = {
     postObject: API.PostVO;
@@ -35,7 +36,7 @@ const PostCardSection: React.FC<Props> = React.memo((props) => {
                     </Link>
                 </Typography.Text>
                 <Typography.Text type="secondary">
-                    {formatTime(postObject.createTime || "")}
+                    {moment(postObject.createTime).fromNow()}
                 </Typography.Text>
                 <Typography.Text type="secondary">
                     {/* <EyeOutlined /> 1,908 {postObject.viewNum} */}

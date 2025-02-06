@@ -47,8 +47,23 @@ export async function getTagVoUsingGet(
   });
 }
 
+/** getTagVOByTitle GET /api/tag/get/vo/byTitle */
+export async function getTagVoByTitleUsingGet(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.getTagVOByTitleUsingGETParams,
+  options?: { [key: string]: any }
+) {
+  return request<API.BaseResponseTagVO_>("/api/tag/get/vo/byTitle", {
+    method: "GET",
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
+
 /** listTagVOByPage POST /api/tag/list/page/vo */
-export async function listTagVoByPageUsingPost(
+export async function listTagVoByPageUsingPost1(
   body: API.TagQueryDTO,
   options?: { [key: string]: any }
 ) {

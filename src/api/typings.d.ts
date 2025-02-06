@@ -27,6 +27,13 @@ declare namespace API {
     success?: boolean;
   };
 
+  type BaseResponsePageResultCategoryVO_ = {
+    code?: number;
+    data?: PageResultCategoryVO_;
+    message?: string;
+    success?: boolean;
+  };
+
   type BaseResponsePageResultPostCommentReplyVO_ = {
     code?: number;
     data?: PageResultPostCommentReplyVO_;
@@ -37,6 +44,27 @@ declare namespace API {
   type BaseResponsePageResultPostCommentVO_ = {
     code?: number;
     data?: PageResultPostCommentVO_;
+    message?: string;
+    success?: boolean;
+  };
+
+  type BaseResponsePageResultPostFavourVO_ = {
+    code?: number;
+    data?: PageResultPostFavourVO_;
+    message?: string;
+    success?: boolean;
+  };
+
+  type BaseResponsePageResultPostThumbVO_ = {
+    code?: number;
+    data?: PageResultPostThumbVO_;
+    message?: string;
+    success?: boolean;
+  };
+
+  type BaseResponsePageResultPostViewVO_ = {
+    code?: number;
+    data?: PageResultPostViewVO_;
     message?: string;
     success?: boolean;
   };
@@ -83,12 +111,50 @@ declare namespace API {
     success?: boolean;
   };
 
+  type BaseResponseUserVO_ = {
+    code?: number;
+    data?: UserVO;
+    message?: string;
+    success?: boolean;
+  };
+
+  type CategoryQueryDTO = {
+    current?: number;
+    id?: number;
+    notId?: number;
+    pageSize?: number;
+    searchText?: string;
+    sortField?: string;
+    sortOrder?: string;
+    title?: string;
+    userId?: number;
+  };
+
+  type CategoryVO = {
+    createTime?: string;
+    id?: string;
+    picture?: string;
+    title?: string;
+    updateTime?: string;
+    userId?: string;
+  };
+
   type getPostVOUsingGETParams = {
     /** id */
     id?: number;
   };
 
+  type getTagVOByTitleUsingGETParams = {
+    /** title */
+    title?: string;
+  };
+
   type getTagVOUsingGETParams = {
+    /** id */
+    id?: number;
+  };
+
+  type getUserVOUsingGETParams = {
     /** id */
     id?: number;
   };
@@ -121,6 +187,12 @@ declare namespace API {
     total?: number;
   };
 
+  type PageResultCategoryVO_ = {
+    pageCount?: number;
+    records?: CategoryVO[];
+    total?: number;
+  };
+
   type PageResultPostCommentReplyVO_ = {
     pageCount?: number;
     records?: PostCommentReplyVO[];
@@ -130,6 +202,24 @@ declare namespace API {
   type PageResultPostCommentVO_ = {
     pageCount?: number;
     records?: PostCommentVO[];
+    total?: number;
+  };
+
+  type PageResultPostFavourVO_ = {
+    pageCount?: number;
+    records?: PostFavourVO[];
+    total?: number;
+  };
+
+  type PageResultPostThumbVO_ = {
+    pageCount?: number;
+    records?: PostThumbVO[];
+    total?: number;
+  };
+
+  type PageResultPostViewVO_ = {
+    pageCount?: number;
+    records?: PostViewVO[];
     total?: number;
   };
 
@@ -157,7 +247,10 @@ declare namespace API {
   };
 
   type PostAddDTO = {
+    categoryId?: number;
     content?: string;
+    picture?: number;
+    tagIdList?: string[];
     tags?: string[];
     title?: string;
   };
@@ -173,7 +266,9 @@ declare namespace API {
   };
 
   type PostCommentQueryDTO = {
+    createPostUserId?: number;
     current?: number;
+    notUserId?: number;
     pageSize?: number;
     postId?: number;
     reviewStatus?: number;
@@ -233,6 +328,7 @@ declare namespace API {
     createTime?: string;
     hasThumb?: boolean;
     id?: string;
+    post?: PostVO;
     postId?: string;
     replyPage?: PagePostCommentReplyVO_;
     reviewStatus?: number;
@@ -251,15 +347,27 @@ declare namespace API {
   };
 
   type PostFavourQueryDTO = {
+    createPostUserId?: number;
     current?: number;
     pageSize?: number;
+    postId?: number;
     postQueryDTO?: PostQueryDTO;
     sortField?: string;
     sortOrder?: string;
     userId?: number;
   };
 
+  type PostFavourVO = {
+    createTime?: string;
+    post?: PostVO;
+    postId?: string;
+    type?: string;
+    user?: UserVO;
+    userId?: string;
+  };
+
   type PostQueryDTO = {
+    categoryId?: number;
     content?: string;
     current?: number;
     favourUserId?: number;
@@ -279,9 +387,32 @@ declare namespace API {
     postId?: number;
   };
 
+  type PostThumbQueryDTO = {
+    createPostUserId?: number;
+    current?: number;
+    pageSize?: number;
+    postId?: number;
+    postQueryDTO?: PostQueryDTO;
+    sortField?: string;
+    sortOrder?: string;
+    userId?: number;
+  };
+
+  type PostThumbVO = {
+    createTime?: string;
+    post?: PostVO;
+    postId?: string;
+    type?: string;
+    user?: UserVO;
+    userId?: string;
+  };
+
   type PostUpdateDTO = {
+    categoryId?: number;
     content?: string;
     id?: number;
+    picture?: number;
+    tagIdList?: string[];
     tags?: string[];
     title?: string;
   };
@@ -290,22 +421,40 @@ declare namespace API {
     postId?: number;
   };
 
+  type PostViewDeleteDTO = {
+    userId?: number;
+  };
+
   type PostViewQueryDTO = {
+    createPostUserId?: number;
     current?: number;
     pageSize?: number;
+    postId?: number;
     postQueryDTO?: PostQueryDTO;
+    searchPostTitle?: string;
     sortField?: string;
     sortOrder?: string;
     userId?: number;
   };
 
+  type PostViewVO = {
+    createTime?: string;
+    post?: PostVO;
+    postId?: string;
+    user?: UserVO;
+    userId?: string;
+  };
+
   type PostVO = {
+    categoryId?: number;
+    commentNum?: number;
     content?: string;
     createTime?: string;
     favourNum?: number;
     hasFavour?: boolean;
     hasThumb?: boolean;
     id?: string;
+    picture?: number;
     tagList?: string[];
     thumbNum?: number;
     title?: string;
@@ -393,6 +542,19 @@ declare namespace API {
     userId?: string;
   };
 
+  type UserFollowAddDTO = {
+    fansId?: number;
+  };
+
+  type UserFollowQueryDTO = {
+    current?: number;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+    userId?: number;
+    userQueryDTO?: UserQueryDTO;
+  };
+
   type UserLoginDTO = {
     userAccount?: string;
     userPassword?: string;
@@ -420,7 +582,14 @@ declare namespace API {
 
   type UserVO = {
     createTime?: string;
+    fansCount?: number;
+    favourPostCount?: number;
+    followTagCount?: number;
+    followUserCount?: number;
     id?: string;
+    isFollowUser?: boolean;
+    postCount?: number;
+    thumbPostCount?: number;
     userAvatar?: string;
     userName?: string;
     userProfile?: string;

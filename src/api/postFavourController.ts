@@ -35,6 +35,24 @@ export async function listFavourPostByPageUsingPost(
   );
 }
 
+/** listPostVOByPage POST /api/postFavour/list/page/vo */
+export async function listPostVoByPageUsingPost2(
+  body: API.PostFavourQueryDTO,
+  options?: { [key: string]: any }
+) {
+  return request<API.BaseResponsePageResultPostFavourVO_>(
+    "/api/postFavour/list/page/vo",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: body,
+      ...(options || {}),
+    }
+  );
+}
+
 /** listMyFavourPostByPage POST /api/postFavour/my/list/page */
 export async function listMyFavourPostByPageUsingPost(
   body: API.PostQueryDTO,

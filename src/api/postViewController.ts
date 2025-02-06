@@ -17,6 +17,21 @@ export async function doPostViewUsingPost(
   });
 }
 
+/** deletePostView POST /api/postView/delete */
+export async function deletePostViewUsingPost(
+  body: API.PostViewDeleteDTO,
+  options?: { [key: string]: any }
+) {
+  return request<API.BaseResponseInt_>("/api/postView/delete", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** listViewPostByPage POST /api/postView/list/page */
 export async function listViewPostByPageUsingPost(
   body: API.PostViewQueryDTO,
@@ -30,6 +45,24 @@ export async function listViewPostByPageUsingPost(
     data: body,
     ...(options || {}),
   });
+}
+
+/** listPostVOByPage POST /api/postView/list/page/vo */
+export async function listPostVoByPageUsingPost4(
+  body: API.PostViewQueryDTO,
+  options?: { [key: string]: any }
+) {
+  return request<API.BaseResponsePageResultPostViewVO_>(
+    "/api/postView/list/page/vo",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: body,
+      ...(options || {}),
+    }
+  );
 }
 
 /** listMyViewPostByPage POST /api/postView/my/list/page */

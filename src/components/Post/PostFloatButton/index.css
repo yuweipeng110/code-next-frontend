@@ -10,4 +10,89 @@
         height: 45px !important;
         z-index: 0;
     }
+
+    .user-float-btn {
+        background: red;
+
+        .ant-float-btn-icon {
+            margin: inherit !important;
+            width: auto !important;
+        }
+    }
+}
+
+.share-popover {
+
+    .share-popup {
+        background: var(--code-layer-1);
+        border-radius: 4px;
+        padding: 9px 0;
+        width: -webkit-max-content;
+        width: -moz-max-content;
+        width: max-content;
+        box-shadow: 0 8px 24px rgba(81, 87, 103, .16);
+
+        li {
+            display: flex;
+            align-items: center;
+            height: 44px;
+            padding: 0 15px;
+            list-style: none;
+            cursor: pointer;
+            color: var(--code-font-3);
+
+            &:hover {
+                background-color: var(--code-layer-3-fill);
+            }
+
+            &:hover .share-icon {
+                color: var(--code-font-2);
+            }
+
+            .share-icon {
+                width: 20px;
+                height: 20px;
+                font-size: 20px;
+                color: var(--code-font-3);
+            }
+
+            .sprite-icon {
+                fill: currentColor;
+                vertical-align: middle;
+                transition: all .15s linear;
+            }
+
+            .share-title {
+                margin-left: 8px;
+                font-size: 14px;
+                color: var(--code-font-2);
+            }
+        }
+    }
+}
+
+.wechat-qrcode-popover {
+
+    .wechat-qrcode {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 4px;
+        background-color: var(--code-layer-4-dropdown);
+        padding: 20px 0 16px;
+        box-shadow: 0 8px 24px rgba(81, 87, 103, .16);
+        width: 120px;
+
+        .wechat-qrcode-img {
+            width: 80px;
+            height: 80px;
+        }
+
+        .wechat-qrcode-title {
+            font-size: 14px;
+            line-height: 22px;
+            color: var(--code-font-2);
+            margin-top: 12px;
+        }
+    }
 }

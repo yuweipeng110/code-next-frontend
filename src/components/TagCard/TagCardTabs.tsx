@@ -5,7 +5,7 @@ import { message, TabsProps } from 'antd';
 import { RootState } from '@/stores';
 import { useSelector } from 'react-redux';
 import { listMyFollowTagByPageUsingPost } from '@/api/tagFollowController';
-import { listTagVoByPageUsingPost } from '@/api/tagController';
+import { listTagVoByPageUsingPost1 } from '@/api/tagController';
 import TagCard from '.';
 
 type Type = "all" | "subscribed";
@@ -21,6 +21,12 @@ type ParamsType = {
     searchUserId?: number,
 }
 
+
+const DEFAULT_PAGE_PARAMS = {
+    current: 1,
+    pageSize: 10,
+};
+
 /**
  * 标签卡片Tabs
  * @returns 
@@ -32,7 +38,7 @@ const TagCardTabs = React.memo(() => {
     const initParams: ParamsType = {
         type: "all",
         current: 1,
-        pageSize: 8,
+        pageSize: 16,
         sortField: "create_time",
         sortOrder: "descend",
     };
@@ -94,7 +100,7 @@ const TagCardTabs = React.memo(() => {
                 return;
             }
             const query = params;
-            const res = await listTagVoByPageUsingPost(query);
+            const res = await listTagVoByPageUsingPost1(query);
             const dataList = res.data?.records || [];
             const total = res.data?.total || 0;
             // setDataList(dataList);

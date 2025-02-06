@@ -19,10 +19,13 @@
             overflow: auto;
             padding-bottom: 96px !important;
             /* background-color: #FFF; */
-            margin-bottom: 72px;
-            padding: 14px 20px 30px !important;
+            /* margin-bottom: 72px; */
+            /* padding: 14px 20px 30px !important; */
+            /* padding: 0px 0px 30px !important; */
+            padding: 0 !important;
             /* margin-top: 55px; */
             /* background-color: transparent; */
+            background-color: var(--code-background);
         }
     }
 

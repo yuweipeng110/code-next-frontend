@@ -1,0 +1,113 @@
+.users-recommend {
+
+    .user-list {
+        display: flex;
+        width: 100%;
+
+        li {
+            padding: 0 6px;
+            width: 25%;
+            min-width: 0;
+            list-style: none;
+        }
+    }
+
+    .recommend-users-tag {
+        padding-inline: 0px !important;
+        margin-inline-end: 0px !important;
+        border: none;
+        display: flow;
+
+        .ant-tag-close-icon {
+            position: absolute;
+            top: 6px;
+            right: 7px;
+            display: flex;
+            padding: 4px;
+            cursor: pointer;
+        }
+
+        .recommend-users-card {
+            position: relative;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+            text-align: center;
+            border: 1px solid var(--code-gray-1-3);
+            background: var(--code-layer-1);
+            border-radius: 4px;
+            padding: 11px;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            align-items: center;
+
+            .user-avatar {
+                margin-bottom: 8px;
+            }
+
+            .username {
+                min-width: 0;
+                max-width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                word-break: break-all;
+                font-size: 14px;
+                line-height: 22px;
+                margin-bottom: 4px;
+                color: var(--code-font-1);
+            }
+
+            .count {
+                opacity: .8;
+                margin-bottom: 2px;
+                color: var(--code-font-2);
+
+
+                span {
+                    position: relative;
+
+                    &:not(:last-child):after {
+                        content: "·";
+                        position: absolute;
+                        right: -7px;
+                    }
+
+                    &:not(:last-child) {
+                        margin-right: 8px;
+                    }
+                }
+            }
+
+            .reason {
+                color: var(--code-font-2);
+                background-color: var(--code-gray-3);
+                margin-bottom: 8px;
+                border-radius: 2px;
+                padding: 2px 6px;
+                min-width: 0;
+                max-width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                word-break: break-all;
+            }
+
+
+            .ant-btn {
+                width: 80px;
+                height: 28px;
+                font-size: 12px;
+                transition: all .2s;
+            }
+
+            .followed {
+                border: 1px solid var(--secondary-stroke-1, rgba(30, 128, 255, .3));
+                background: var(--secondary-fill-1, rgba(30, 128, 255, .05));
+                color: var(--code-brand-1-normal);
+            }
+        }
+    }
+}

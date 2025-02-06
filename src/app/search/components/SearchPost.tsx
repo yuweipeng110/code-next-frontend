@@ -3,7 +3,7 @@ import { Empty, List, Skeleton, Space, Typography } from 'antd';
 import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
 import InfiniteScrollComponent from '@/components/InfiniteScrollComponent';
 import HighlightText from '@/components/Other/HighlightText';
-import { formatTime } from '@/utils/date';
+import moment from 'moment';
 import "./index.css";
 
 type Props = {
@@ -34,7 +34,7 @@ const SearchPost: React.FC<Props> = React.memo((props) => {
             <Typography.Text type="secondary" className="meta-row">
                 <Space>
                     {item.user?.userName}
-                    {formatTime(item.createTime!)}
+                    {moment(item.createTime).fromNow()}
                     {item.tagList?.map(tag => tag)}
                 </Space>
             </Typography.Text>
@@ -44,7 +44,6 @@ const SearchPost: React.FC<Props> = React.memo((props) => {
     return (
         <div className="search-post">
             <InfiniteScrollComponent
-                // data={data}
                 dataLength={data.length}
                 total={total}
                 loadMoreData={loadMoreData}
@@ -80,7 +79,7 @@ const SearchPost: React.FC<Props> = React.memo((props) => {
                             />
                             <Space direction="vertical" size="small" className='flex'>
                                 <Typography.Title level={4} className="title-row space-nowap">
-                                    <HighlightText text={index + "-" + data.length + item.title} keyword={keyword} />
+                                    <HighlightText text={item.title} keyword={keyword} />
                                 </Typography.Title>
                                 <Typography.Text className="content-row">
                                     <HighlightText text={item.content} keyword={keyword} />

@@ -10,6 +10,21 @@ export async function getLoginUserUsingGet(options?: { [key: string]: any }) {
   });
 }
 
+/** getUserVO GET /api/user/get/vo */
+export async function getUserVoUsingGet(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.getUserVOUsingGETParams,
+  options?: { [key: string]: any }
+) {
+  return request<API.BaseResponseUserVO_>("/api/user/get/vo", {
+    method: "GET",
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
+
 /** listUserVOByPage POST /api/user/list/page/vo */
 export async function listUserVoByPageUsingPost(
   body: API.UserQueryDTO,

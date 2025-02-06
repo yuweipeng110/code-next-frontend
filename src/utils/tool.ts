@@ -5,7 +5,7 @@
  * @returns 
  */
 export const debounce = (func: Function, delay: number) => {
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setTimeout>;
     return (...args: any) => {
         if (timer) clearInterval(timer);
         timer = setTimeout(() => {
@@ -20,7 +20,7 @@ export const debounce = (func: Function, delay: number) => {
  * @param delay 
  * @returns 
  */
-export const throttle = (func: any, delay: number) => {
+export const throttle = (func: Function, delay: number) => {
     let timeStamp = 0;
     return (...rest: any) => {
         if (Date.now() - timeStamp > delay) {
@@ -91,3 +91,24 @@ export const generateItemsRecursive = (
 
     return parent;
 };
+
+/**
+ * 格式化数字
+ * @param num 
+ * @returns 
+ */
+export const formatNumber = (num: number) => {
+    if (num < 1000 || num === undefined) return num; // 小于1000直接返回
+
+    const units = ['K', 'M', 'B', 'T']; // 单位：千、百万、十亿、万亿
+    let unitIndex = -1;
+
+    // 将数字转换为浮动数值并计算出单位
+    while (num >= 1000 && unitIndex < units.length - 1) {
+        num /= 1000;
+        unitIndex++;
+    }
+
+    // 保留1位小数并添加单位
+    return num.toFixed(1) + units[unitIndex];
+}

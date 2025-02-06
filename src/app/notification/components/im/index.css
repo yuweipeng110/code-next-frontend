@@ -1,0 +1,204 @@
+#notification-im {
+    .ant-card-body {
+        padding: 0 !important;
+
+
+        .im-conv-panel {
+            width: 340px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .search-container {
+            padding: 16px;
+            position: relative;
+            overflow: hidden;
+
+            .search-wapper {
+                width: 100%;
+                display: flex;
+                align-items: center;
+            }
+
+            .input-wapper {
+                position: relative;
+                transition: all .25s ease 0s;
+                flex-basis: 100%;
+                flex-shrink: 0;
+            }
+
+            .search-icon {
+                font-size: 16px;
+                color: var(--code-font-3);
+                margin-right: 20px;
+                cursor: pointer;
+
+                &:hover {
+                    color: var(--code-brand-1-normal);
+                }
+            }
+
+            .search-cancel {
+                flex-basis: 38px;
+                flex-shrink: 0;
+                display: none;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 22px;
+                color: var(--code-font-brand1-normal);
+                white-space: nowrap;
+                padding: 5px 0px 5px 10px;
+                cursor: pointer;
+            }
+        }
+
+        .is-focus {
+            .input-wapper {
+                flex-basis: calc(100% - 38px);
+            }
+
+            .search-cancel {
+                display: flex;
+            }
+        }
+
+        .im-scroll {
+            flex: 1;
+            overflow: auto;
+            position: relative;
+            overflow-y: overlay !important;
+
+            .im-search-result {
+                overflow: auto;
+                height: 532px;
+
+                .search-item {
+                    display: flex;
+                    align-items: center;
+                    padding: 20px 16px;
+                    font-size: 16px;
+
+                    &:hover {
+                        cursor: pointer;
+                        background: var(--code-brand-5-light);
+                    }
+
+                    .ant-avatar {
+                        margin-right: 12px;
+                    }
+
+                    .user-name {
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow: hidden;
+                    }
+                }
+            }
+        }
+
+
+        .ant-conversations {
+            padding: 0 !important;
+            gap: inherit;
+
+            .ant-conversations-item {
+                border-radius: 0;
+                height: auto;
+                padding: 16px;
+
+                .username {
+                    font-weight: 400;
+                    font-size: 16px;
+                    color: var(--code-font-1);
+                    display: inline-block;
+                    vertical-align: middle;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    word-break: break-all;
+                    overflow-wrap: break-word;
+                }
+
+                .time {
+                    font-size: 12px;
+                    color: var(--code-font-3);
+                    white-space: nowrap;
+                }
+
+                .msg-preview {
+                    font-size: 13px;
+                    line-height: 21px;
+                    color: var(--code-font-3);
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+
+            .ant-conversations-item-active {
+                background: var(--code-brand-5-light);
+            }
+
+        }
+
+        .chat-header {
+            border-bottom: 1px solid var(--code-gray-1-1);
+            padding: 18px 24px;
+
+            .chat-info {
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 24px;
+                color: var(--code-font-1);
+                text-align: center;
+                flex-shrink: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                cursor: pointer;
+                user-select: none;
+            }
+        }
+
+        .ant-app {
+            overflow: hidden;
+        }
+
+        .ant-pro-chat-list {
+            .ant-pro-chat-list-item-message-content {
+                background: rgba(30, 128, 255, .24);
+            }
+        }
+
+        .ant-pro-chat-input-area {
+            border-top: 1px solid var(--code-gray-1-1);
+            background: none;
+        }
+    }
+
+
+    .ant-bubble-content-filled {
+        background: rgba(30, 128, 255, .24);
+    }
+
+    .notification-message {
+        .ant-bubble-content {
+            padding: 0;
+            min-height: 0;
+        }
+
+        .ant-bubble-footer {
+            width: 100%;
+
+            .msg-text {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 12px auto;
+                text-align: center;
+                color: var(--code-font-3);
+            }
+        }
+    }
+}

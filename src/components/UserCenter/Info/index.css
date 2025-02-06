@@ -1,0 +1,87 @@
+.user-center-info {
+    .user-info-card {
+        padding: 26px;
+
+        .avatar {
+            &:hover {
+                transform: rotate(666turn);
+                transition-delay: 1s;
+                transition-property: all;
+                transition-duration: 59s;
+                transition-timing-function: cubic-bezier(.34, 0, .84, 1);
+            }
+        }
+
+        .info-box {
+            margin-bottom: 6px;
+
+            .icon {
+                font-size: 18px;
+                color: #585a5a;
+            }
+        }
+
+        .introduction {
+            a {
+                color: #4a68ad;
+                line-height: 25px;
+                font-size: 15px;
+
+                &::before {
+                    content: "+ ";
+                }
+            }
+
+            .position {
+                color: var(--code-font-3);
+                font-size: 15px;
+
+                .position-icon {
+                    margin-right: 8px;
+                    height: 22px;
+                }
+
+                span {
+                    vertical-align: top;
+                }
+            }
+
+            .intro {
+                color: var(--code-font-3);
+                font-size: 15px;
+                margin-top: 4px;
+
+                .intro-icon {
+                    margin-right: 8px;
+                    height: 22px;
+                }
+
+                span {
+                    vertical-align: top;
+                }
+            }
+
+            .operate-btn {
+                .followed {
+                    padding: 4px 10px;
+
+                    .user-icon {
+                        color: var(--code-font-3);
+                    }
+                }
+
+                .ant-btn {
+                    margin-right: 12px;
+                    transition: all .2s;
+                }
+
+                .im-btn {
+                    width: 88px;
+                    border: 1px solid var(--secondary-stroke-1, rgba(30, 128, 255, .3));
+                    background: var(--secondary-fill-1, rgba(30, 128, 255, .05));
+                    color: var(--code-brand-1-normal);
+                }
+            }
+        }
+    }
+}

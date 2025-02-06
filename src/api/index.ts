@@ -2,6 +2,7 @@
 /* eslint-disable */
 // API 更新时间：
 // API 唯一标识：
+import * as categoryController from "./categoryController";
 import * as postController from "./postController";
 import * as postCommentController from "./postCommentController";
 import * as postCommentReplyController from "./postCommentReplyController";
@@ -14,7 +15,9 @@ import * as searchController from "./searchController";
 import * as tagController from "./tagController";
 import * as tagFollowController from "./tagFollowController";
 import * as userController from "./userController";
+import * as userFollowController from "./userFollowController";
 export default {
+  categoryController,
   postController,
   postCommentController,
   postCommentReplyController,
@@ -27,4 +30,5 @@ export default {
   tagController,
   tagFollowController,
   userController,
+  userFollowController,
 };

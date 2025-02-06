@@ -26,7 +26,7 @@ const UserInfoCardPopover: React.FC<Props> = React.memo((props) => {
                         <div className="user-info-avatar-container">
                             <div className="flex-center" style={{ position: "relative" }}>
                                 <div className="avatar-background"></div>
-                                <Link href="/user/1" target="_blank" >
+                                <Link href={`/user/${userInfo.id}`} target="_blank" >
                                     <Avatar src={userInfo.userAvatar || DEFAULT_AVATAR} size={60} />
                                 </Link>
                                 <img alt="VIP标识" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" className="vip-icon mobile" src="/assets/vip.svg" style={{ color: "transparent" }} />

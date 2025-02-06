@@ -1,0 +1,109 @@
+:root {
+    --background-color: #fff;
+    --card-background-color: #fff;
+    --primary-text-color: rgba(0, 0, 0, .88);
+    --primary-color: #167fff;
+    --hover-color: #1890ff;
+    --list-item-hover-color: #fafafa;
+    --card-text-color: #444;
+    --reply-content-text-color: rgba(0, 0, 0, .45);
+    --link-visited: #771caa;
+    --immersion-action-button-icon-color: #979797;
+    --immersion-action-button-background-color: #f6f7fb;
+    --markdown-body-text-color: #262626;
+    --yu-color-split: rgba(5, 5, 5, .06);
+    --disabled-color: #bfbfbf;
+    --light-green-10: #e0f5e0;
+    --light-green-20: #b8e5b8;
+    --light-green-40: #87d487;
+    --light-green-60: #4caf50;
+    --light-green-80: #2e7d32;
+    --light-green-100: #1b5e20;
+    --green-10: var(--light-green-10);
+    --green-20: var(--light-green-20);
+    --green-40: var(--light-green-40);
+    --green-60: var(--light-green-60);
+    --green-80: var(--light-green-80);
+    --green-100: var(--light-green-100);
+    --light-orange-10: #ffe8d5;
+    --light-orange-20: #ffd1a6;
+    --light-orange-40: #ffb270;
+    --light-orange-60: #ff9140;
+    --light-orange-80: #ff6e0d;
+    --light-orange-100: #e65000;
+    --orange-10: var(--light-orange-10);
+    --orange-20: var(--light-orange-20);
+    --orange-40: var(--light-orange-40);
+    --orange-60: var(--light-orange-60);
+    --orange-80: var(--light-orange-80);
+    --orange-100: var(--light-orange-100);
+    --opacity-black-20: #0000000a;
+    --fill-tertiary: var(--opacity-black-20);
+    --github-icon-color: #1f2328
+}
+
+.dark-theme,
+body[data-theme=dark] {
+    --background-color: #121212;
+    --card-background-color: #141414;
+    --text-color: hsla(0, 0%, 100%, .95);
+    --primary-text-color: hsla(0, 0%, 100%, .85);
+    --primary-color: #f3cc62;
+    --hover-color: #f3cc62;
+    --list-item-hover-color: #1f1f1f;
+    --card-text-color: #444;
+    --reply-content-text-color: hsla(0, 0%, 100%, .45);
+    --link-visited: #d175ff;
+    --immersion-action-button-icon-color: #c3bcaf;
+    --immersion-action-button-background-color: #313334;
+    --markdown-body-text-color: #d0cac0;
+    --yu-color-split: #303030;
+    --disabled-color: #bfbfbf;
+    --opacity-black-20: #ffffff14;
+    --fill-tertiary: var(--opacity-black-20);
+    --github-icon-color: #f2eee8
+}
+
+.dark-theme,
+body[data-theme=dark] .bytemd-toolbar {
+    border-bottom-color: #414444;
+    background-color: #141414
+}
+
+.dark-theme,
+body[data-theme=dark] .bytemd {
+    color: #cdc7bc;
+    border-color: #414444;
+    background-color: #141414;
+}
+
+.dark-theme,
+body[data-theme=dark] .CodeMirror {
+    background-image: none;
+    background-color: #141414;
+    color: #e5e0d8
+}
+
+.dark-theme,
+body[data-theme=dark] .markdown-body {
+    color: #d0cac0;
+    background-color: #141414
+}
+
+.dark-theme,
+body[data-theme=dark] .markdown-navigation .title-anchor {
+    color: hsla(0, 0%, 100%, .85)
+}
+
+.dark-theme,
+body[data-theme=dark] .markdown-navigation .title-anchor.active,
+.dark-theme,
+body[data-theme=dark] .markdown-navigation .title-anchor:hover {
+    text-decoration: inherit !important;
+    background-color: #434343 !important
+}
+
+.dark-theme,
+body[data-theme=dark] #wx_default_tip {
+    color: #fff
+}

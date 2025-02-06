@@ -68,8 +68,8 @@ const PostPage = () => {
         <div id="post-page" className="max-width-content-1">
             <Flex gap={24}>
                 <Layout.Content>
-                    {/* <div style={{ marginBottom: 16 }} />
-                    <PostCard postObject={postObj} postLoading={postLoading} /> */}
+                    <div style={{ marginBottom: 16 }} />
+                    <PostCard postObject={postObj} postLoading={postLoading} />
                     <div style={{ marginBottom: 16 }} />
                     {
                         Object.keys(postObj).length > 0 && (
@@ -78,7 +78,7 @@ const PostPage = () => {
                     }
                 </Layout.Content>
                 <Layout.Sider className="post-list-sider" collapsible collapsed={siderCollapsed} trigger={null} collapsedWidth={20} width={300} style={{ padding: 0, background: "none" }}>
-                    {/* <div className="sider-bar">
+                    <div className="sider-bar">
                         <Button className="collapse-btn" onClick={() => {
                             setSiderCollapsed(!siderCollapsed)
                         }} >
@@ -91,7 +91,7 @@ const PostPage = () => {
                         ) : (
                             <>
                                 <DoubleRightOutlined onClick={() => setSiderCollapsed(!siderCollapsed)} />
-                                <UserCardSection userLoading={postLoading} userObject={postObj.user || Object.create(null)} />
+                                {Object.keys(postObj).length > 0 && <UserCardSection userLoading={postLoading} postObject={postObj} />}
                                 <div style={{ marginBottom: 16 }} />
                                 <Affix offsetTop={60}>
                                     <div>
@@ -108,10 +108,10 @@ const PostPage = () => {
                                 <PostCardList data={[]} title="精选内容" loading={false} />
                             </>
                         )
-                    } */}
+                    }
                 </Layout.Sider>
             </Flex>
-            {/* <PostFloatButton postObject={postObj} immerse={immerse} setImmerse={setImmerse} /> */}
+            <PostFloatButton postObject={postObj} immerse={immerse} setImmerse={setImmerse} />
         </div>
     )
 }

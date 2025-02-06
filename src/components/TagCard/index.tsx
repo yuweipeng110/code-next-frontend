@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ProCard } from '@ant-design/pro-components';
 import { Card, List, Image, Typography, Button, Skeleton, Empty, Space, message } from 'antd';
 import InfiniteScrollComponent from '../InfiniteScrollComponent';
@@ -41,10 +41,6 @@ const TagCard: React.FC<Props> = React.memo((props) => {
         }
     }, [data]);
 
-    useEffect(() => {
-        console.log('useEffect followedDataIdList', followedDataIdList)
-    }, [followedDataIdList])
-
     /**
      * 标签关注/取消
      * 
@@ -64,7 +60,10 @@ const TagCard: React.FC<Props> = React.memo((props) => {
         } catch (error: any) {
             message.error('更新失败，' + error.message);
         }
-        setCurrentExecuteId("");
+
+        setTimeout(() => {
+            setCurrentExecuteId("");
+        }, 1000);
     }
 
     /**
@@ -88,6 +87,9 @@ const TagCard: React.FC<Props> = React.memo((props) => {
                 style={{
                     padding: 20,
                     textAlign: 'center',
+                }}
+                bodyStyle={{
+                    paddingInline: 0
                 }}
             >
                 <Card.Meta
@@ -113,7 +115,6 @@ const TagCard: React.FC<Props> = React.memo((props) => {
                         >
                             <p>
                                 <Typography.Text>
-                                    {isFollowed(tagItem.id).toString()}
                                     {getCurrentFollowCount(tagItem)} 关注  {tagItem.postCount} 文章
                                 </Typography.Text>
                             </p>
@@ -177,7 +178,6 @@ const TagCard: React.FC<Props> = React.memo((props) => {
     return (
         <div className="tag-card">
             <InfiniteScrollComponent
-                // data={data}
                 dataLength={data.length}
                 total={total}
                 loadMoreData={loadMoreData}

@@ -34,7 +34,7 @@ const UserLoginPage: React.FC = () => {
         // 保存用户登录状态
         dispatch(setLoginUser(res.data));
         loginUserInfoStorage.saveUserInfo(JSON.stringify(res.data));
-        router.replace("/");
+        router.replace("/user/" + res.data.id);
         form.resetFields();
       }
     } catch (e: any) {

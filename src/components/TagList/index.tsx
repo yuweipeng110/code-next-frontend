@@ -1,10 +1,12 @@
 import React from "react";
 import { Tag } from "antd";
 import Link from "next/link";
+import { truncate } from "lodash";
 import "./index.css";
 
 interface Props {
     tagList?: string[];
+    size?: "small" | "default" | "large";
 }
 
 /**
@@ -13,18 +15,20 @@ interface Props {
  * @constructor
  */
 const TagList = React.memo((props: Props) => {
-    const { tagList = [] } = props;
+    const { tagList = [], size = "default" } = props;
 
     return (
         <div className="tag-list">
-            {tagList.map((tag) => {
+            {tagList.map((tagItem) => {
                 return (
-                    <Link key={tag} href={`/tag/${tag}`} target="_blank">
-                        <Tag bordered={false}>{tag}</Tag>
+                    <Link key={tagItem} href={`/tag/${tagItem}`} target="_blank">
+                        <Tag bordered={false} style={size === "small" ? { padding: "0px 4px", fontSize: 12 } : { padding: "3px 10px" }}>
+                            {tagItem}
+                        </Tag>
                     </Link>
                 )
             })}
-        </div>
+        </div >
     );
 })
 

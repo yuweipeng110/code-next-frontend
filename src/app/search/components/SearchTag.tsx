@@ -30,7 +30,6 @@ const SearchTag: React.FC<Props> = React.memo((props) => {
     return (
         <div className="search-tag">
             <InfiniteScrollComponent
-                // data={data}
                 dataLength={data.length}
                 total={total}
                 loadMoreData={loadMoreData}
@@ -43,8 +42,8 @@ const SearchTag: React.FC<Props> = React.memo((props) => {
                         <List.Item key={index} style={{ padding: 20 }}>
                             <List.Item.Meta
                                 avatar={<Avatar src={item.picture} size={45} />}
-                                title={<HighlightText text={index + "-" + data.length + item.title} keyword={keyword} />}
-                                description={item.description}
+                                title={<HighlightText text={item.title} keyword={keyword} />}
+                                description={<HighlightText text={item.description} keyword={keyword} />}
                             />
                             {subscribeView(item, index)}
                         </List.Item>

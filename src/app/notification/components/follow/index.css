@@ -1,0 +1,45 @@
+.notification-follow {
+    .ant-list-item {
+        padding: 20px;
+
+        .name {
+            color: var(--code-font-1);
+            font-weight: 500;
+        }
+
+        .sub-title {
+            color: var(--code-font-3);
+            font-weight: 400;
+            font-size: 15px;
+        }
+
+        .time {
+            padding-left: 22px;
+            color: var(--code-font-3);
+        }
+
+        .ant-list-item-extra {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .follow-btn {
+                width: 88px;
+                color: var(--code-font-brand1-normal);
+                background-color: var(--code-brand-fill1-normal);
+                border: 1px solid var(--code-brand-stroke1-normal);
+                transition: opacity 0.3s ease;
+
+                &:hover {
+                    opacity: .8;
+                }
+
+                &.active {
+                    color: var(--code-font-3);
+                    background-color: var(--code-gray-3);
+                    border: 1px solid var(--code-gray-1-1);
+                }
+            }
+        }
+    }
+}

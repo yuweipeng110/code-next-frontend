@@ -2,9 +2,12 @@ import { Editor } from "@bytemd/react";
 import gfm from "@bytemd/plugin-gfm";
 import highlight from "@bytemd/plugin-highlight";
 import "github-markdown-css/github-markdown-light.css";
+// 引入中文包
+import zhHans from "bytemd/lib/locales/zh_Hans.json";
 import "bytemd/dist/index.css";
 import "highlight.js/styles/vs.css";
 import "./index.css";
+import "@/app/bytemd.css";
 
 interface Props {
   value?: string;
@@ -41,6 +44,7 @@ const MdEditor = (props: Props) => {
   return (
     <div className="md-editor">
       <Editor
+        locale={zhHans}
         value={value || ""}
         placeholder={placeholder}
         mode="split"

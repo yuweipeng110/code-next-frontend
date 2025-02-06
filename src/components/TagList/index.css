@@ -1,9 +1,21 @@
 .tag-list {
     a {
+        margin-inline-end: 8px;
+
+        &:last-child {
+            margin-inline-end: 0px;
+        }
+
         .ant-tag {
-            padding: 3px 10px !important;
-            font-size: inherit !important;
-            color: #515767;
+            /* padding: 3px 10px !important; */
+            /* font-size: inherit !important; */
+            /* color: #515767; */
+            color: var(--code-font-3);
+            background: var(--code-gray-2);
+
+            &:last-child {
+                margin-inline-end: 0px;
+            }
 
             &:hover {
                 color: #1677ff;

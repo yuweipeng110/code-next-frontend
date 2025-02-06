@@ -1,0 +1,19 @@
+.user-setting-block-tag {
+    .ant-pro-card-body {
+        padding-inline: 20px;
+
+        span {
+            position: relative;
+
+            &:not(:last-child):after {
+                content: "·";
+                position: absolute;
+                right: -7px;
+            }
+
+            &:not(:last-child) {
+                margin-right: 8px;
+            }
+        }
+    }
+}

@@ -3,8 +3,6 @@ import { Divider } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 type Props = {
-    // 数据源
-    data?: any[];
     // 数据源长度
     dataLength?: number;
     // 数据总数
@@ -25,7 +23,7 @@ type Props = {
  * @returns 
  */
 const InfiniteScrollComponent: React.FC<Props> = React.memo((props) => {
-    const { children, data, dataLength, total, loadMoreData, loader } = props;
+    const { children, dataLength, total, loadMoreData, loader } = props;
 
     return (
         <InfiniteScroll

@@ -3,7 +3,7 @@ const defaultList = Array.from({ length: 50 }).map((_, i) => ({
     id: i + 1,
     href: 'https://ant.design',
     title: `ant design part ${i}`,
-    avatar: `https://api.dicebear.com/7.x/miniavs/svg?seed=${i}`,
+    avatar: `https://picsum.photos/200/300?${i}`,
     description:
         'Ant Design, a design language for background applications, is refined by Ant UED Team.',
     content:

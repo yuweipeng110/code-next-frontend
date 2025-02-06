@@ -1,0 +1,91 @@
+.user-setting-common {
+
+    .check-card-group {
+        display: flex;
+        justify-content: space-around;
+
+        .ant-pro-checkcard {
+            width: auto;
+        }
+    }
+
+    .ant-radio-group {
+        display: flex;
+    }
+
+    .skeleton-card {
+        width: 240px;
+        box-sizing: border-box;
+        border: 1px solid var(--code-gray-1-1);
+        border-radius: 4px;
+        /* margin-right: 20px; */
+        cursor: pointer;
+
+        .ant-pro-card-body {
+            padding: 0;
+        }
+
+        .skeleton-title {
+            display: flex;
+            flex-direction: row;
+            -webkit-box-align: center;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 16px;
+        }
+
+        .mode-skeleton-auto {
+            display: flex;
+            flex-direction: row;
+            border-bottom: 1px solid var(--code-gray-1-1);
+
+            .mode-auto-skeleton {
+                flex: 1 0 auto;
+                padding: 16px;
+                background-color: #fff;
+                border-radius: 4px 0 0 0;
+            }
+
+            .mode-auto-skeleton-dark {
+                flex: 1 0 auto;
+                padding: 16px;
+                background-color: #181818;
+                border-radius: 0 4px 0 0;
+
+                .skeleton-item {
+                    background-color: hsla(0, 0%, 100%, .2);
+                }
+            }
+        }
+
+        .mode-skeleton {
+            padding: 16px;
+            border-bottom: 1px solid var(--code-gray-1-1);
+            border-radius: 4px 4px 0 0;
+        }
+
+        .mode-skeleton-light {
+            background-color: #fff;
+        }
+
+        .mode-skeleton-dark {
+            background-color: #181818;
+
+            .skeleton-item {
+                background-color: hsla(0, 0%, 100%, .2);
+            }
+        }
+
+        .skeleton-item {
+            background-color: #e4e6eb;
+            width: 100%;
+            margin-bottom: 8px;
+            border-radius: 2px;
+            height: 12px;
+
+            &:first-child {
+                width: 50%;
+            }
+        }
+    }
+}

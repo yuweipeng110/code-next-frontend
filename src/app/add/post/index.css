@@ -1,0 +1,69 @@
+.add-post-page {
+    margin: 0 auto;
+    width: 100%;
+    padding: 32px 16px;
+
+    .bytemd {
+        height: 400px;
+    }
+
+    .category-checkable-tag {
+        width: 88px;
+        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        /* background: var(--code-font-3); */
+        /* color: #86909c; */
+        /* background-color: #f4f5f5; */
+        color: var(--code-font-3);
+        background-color: var(--code-gray-2);
+    }
+
+    .ant-tag-checkable-checked {
+        /* background-color: var(--ant-color-primary) !important;
+        color: var(--ant-color-text-light-solid) !important; */
+        color: #1d7dfa;
+        background-color: #e8f3ff;
+    }
+
+    .custom-ant-upload {
+        width: 200px;
+        height: 130px;
+        margin-bottom: 16px;
+
+        .ant-upload-select {
+            width: 200px !important;
+            height: 130px !important;
+        }
+
+        .ant-upload-list-item-container {
+            width: 200px !important;
+            height: 130px !important;
+        }
+
+        .ant-upload-list.ant-upload-list-picture-card {
+            flex-wrap: nowrap;
+        }
+
+        .ant-upload-icon {
+            font-size: 20px;
+            color: var(--code-font-3);
+        }
+
+        .ant-upload-text-title {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 22px;
+            color: var(--code-font-3);
+            margin-top: 10px;
+        }
+    }
+
+    .upload-addvice {
+        font-weight: 400;
+        font-size: 14px;
+        color: var(--code-font-3);
+    }
+}

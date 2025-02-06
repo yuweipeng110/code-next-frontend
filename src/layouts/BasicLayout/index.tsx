@@ -1,19 +1,18 @@
 "use client";
-import { ProLayout } from '@ant-design/pro-components';
+import { DefaultFooter, ProLayout } from '@ant-design/pro-components';
 import { usePathname, useRouter } from 'next/navigation';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '@/stores';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/stores';
 import Link from 'next/link';
 import Image from 'next/image';
 import { menus } from '../../../config/menu';
 import SearchInput from './components/SearchInput';
-import GlobalFooter from '@/components/GlobalFooter/page';
 import BasicLayoutDropdown from './components/BasicLayoutDropdown';
 import VipEntry from './components/VipEntry';
 import Notification from './components/Notification';
-import "./index.css";
 import SuspensionPanel from '@/components/SuspensionPanel';
-import { DEFAULT_AVATAR, DEFAULT_USER_NAME } from '@/constants';
+import { DEFAULT_AVATAR } from '@/constants';
+import "./index.css";
 
 type Props = {
     children: React.ReactNode;
@@ -58,8 +57,9 @@ const BasicLayout: React.FC<Props> = ({ children }) => {
                 }}
                 avatarProps={{
                     src: loginUser.userAvatar || DEFAULT_AVATAR,
-                    size: "large",
-                    title: loginUser.userName || DEFAULT_USER_NAME,
+                    style: { width: 36, height: 36 },
+                    // size: "large",
+                    // title: loginUser.userName || DEFAULT_USER_NAME,
                     // src: 'https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg',
                     // size: 'large',
                     // title: '七妮妮',
@@ -104,9 +104,19 @@ const BasicLayout: React.FC<Props> = ({ children }) => {
                 )}
                 // 渲染底部栏
                 footerRender={() => {
-                    return <GlobalFooter />;
+                    return (
+                        <DefaultFooter
+                            links={[
+                                { key: 'footer1', title: `© ${new Date().getFullYear()} CODE-NEXT-FRONTEND平台`, href: 'www.baidu.com' },
+                            ]}
+                            copyright="作者：admin"
+                            style={{
+                                // background: '#f9f8f8'
+                            }}
+                        />
+                    )
+                    // return <GlobalFooter />;
                 }}
-            // style={{ padding: "14px 20px 30px !important" }}
             >
                 {children}
             </ProLayout>

@@ -1,0 +1,41 @@
+.user-center-detail-list-search-all {
+
+    .ant-list-item {
+        padding: 16px 24px;
+
+        &:hover {
+            background: var(--code-gray-3);
+            transition: background-color 0.3s;
+        }
+
+        .ant-list-item-meta {
+            margin-block-end: 4px;
+
+            .ant-list-item-meta-title {
+                margin-block-end: 4px;
+            }
+
+            .ant-list-item-meta-description {
+                font-size: 13px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+
+        .ant-list-item-action {
+            display: flex;
+            margin-block-start: 4px;
+
+            li {
+                font-size: 13px;
+                padding: 0 10px;
+
+                &:last-child {
+                    flex: 1;
+                    padding-right: 0px;
+                }
+            }
+        }
+    }
+}

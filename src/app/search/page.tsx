@@ -75,7 +75,7 @@ const SearchPage = () => {
         resetList();
         setSearchParams({
             ...initSearchParams,
-            pageSize: searchParamsObj.type === "picture" ? 8 : initSearchParams.pageSize,
+            pageSize: searchParamsObj.type === "picture" ? 12 : initSearchParams.pageSize,
             type: searchParamsObj.type,
             text: searchParamsObj.query,
         })
@@ -112,27 +112,27 @@ const SearchPage = () => {
         {
             key: 'all',
             label: '综合',
-            children: activeKey === "all" ? <SearchAll data={allList} /> : <></>,
+            children: activeKey === "all" && <SearchAll data={allList} />,
         },
         {
             key: 'post',
             label: '帖子',
-            children: activeKey === "post" ? <SearchPost {...childrenProps} data={postList} /> : <></>,
+            children: activeKey === "post" && <SearchPost {...childrenProps} data={postList} />,
         },
         {
             key: 'tag',
             label: '标签',
-            children: activeKey === "tag" ? <SearchTag {...childrenProps} data={tagList} /> : <></>,
+            children: activeKey === "tag" && <SearchTag {...childrenProps} data={tagList} />,
         },
         {
             key: 'picture',
             label: '图片',
-            children: activeKey === "picture" ? <SearchPicture {...childrenProps} data={pictureList} /> : <></>,
+            children: activeKey === "picture" && <SearchPicture {...childrenProps} data={pictureList} />,
         },
         {
             key: 'user',
             label: '用户',
-            children: activeKey === "user" ? <SearchUser {...childrenProps} data={userList} /> : <></>,
+            children: activeKey === "user" && <SearchUser {...childrenProps} data={userList} />,
         },
     ];
 

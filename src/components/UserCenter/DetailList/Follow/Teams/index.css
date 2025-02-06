@@ -1,0 +1,9 @@
+.user-center-detail-list-follow-teams {
+
+    .ant-list-item {
+        &:hover {
+            background: var(--code-gray-3);
+            transition: background-color 0.3s;
+        }
+    }
+}

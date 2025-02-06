@@ -1,0 +1,32 @@
+#notification-page {
+
+    .sticky-box {
+        position: fixed;
+        background-color: var(--code-navigation2);
+        /* background: rgba(255, 255, 255, 0.6); */
+        backdrop-filter: blur(8px);
+        width: 100%;
+        z-index: 1;
+        inset-inline-end: 0;
+
+        /* height: 100%; */
+
+        .ant-tabs-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    }
+
+    .ant-tabs-content-holder {
+        margin-top: 46px;
+    }
+
+    .ant-tabs-content {
+        max-width: 1200px;
+        margin: 20px auto;
+    }
+
+    .ant-list-empty-text {
+        padding: 0 !important;
+    }
+}

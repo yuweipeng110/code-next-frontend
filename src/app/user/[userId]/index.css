@@ -1,0 +1,10 @@
+#user-page {
+    .user-layout-sider {
+        padding: 0;
+        box-sizing: border-box;
+        /* background: var(--code-navigation); */
+        background: transparent;
+        /* padding: 8px; */
+        border-radius: 4px;
+    }
+}

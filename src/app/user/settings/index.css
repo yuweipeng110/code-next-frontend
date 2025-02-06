@@ -1,0 +1,42 @@
+#user-settings-page {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: 500;
+    }
+
+    .user-settings-layout-header {
+        background-color: var(--code-navigation);
+        padding: 0;
+        height: auto;
+        margin: 16px auto 16px;
+        padding-left: 22px;
+        line-height: 45px;
+    }
+
+    .user-settings-layout-sider {
+        padding: 0;
+        box-sizing: border-box;
+        background: var(--code-navigation);
+        width: 230px;
+        height: 626px;
+        padding: 8px;
+        border-radius: 4px;
+    }
+
+    .sub-view-box {
+        position: relative;
+        padding: 20px;
+        background-color: var(--code-layer-1);
+        border-radius: 4px;
+        box-sizing: border-box;
+        /* width: calc(100% - 254px); */
+        min-height: 626px;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+}

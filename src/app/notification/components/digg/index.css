@@ -1,0 +1,21 @@
+.notification-digg {
+    .ant-list-item {
+        padding: 20px;
+
+        .name {
+            color: var(--code-font-1);
+            font-weight: 500;
+        }
+
+        .sub-title {
+            color: var(--code-font-3);
+            font-weight: 400;
+            font-size: 15px;
+        }
+
+        .time {
+            padding-left: 22px;
+            color: var(--code-font-3);
+        }
+    }
+}

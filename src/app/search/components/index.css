@@ -4,7 +4,8 @@
     /* background: white; */
     /* background: #f3f3f3; */
     /* height: 100vh; */
-    background-color: #fff;
+    /* background-color: #fff; */
+    background: var(--code-layer-5);
     max-width: 700px;
 
     /* padding: 20px; */

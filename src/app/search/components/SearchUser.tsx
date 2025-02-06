@@ -30,7 +30,6 @@ const SearchUser: React.FC<Props> = React.memo((props) => {
     return (
         <div className="search-user">
             <InfiniteScrollComponent
-                // data={data}
                 dataLength={data.length}
                 total={total}
                 loadMoreData={loadMoreData}
@@ -43,8 +42,8 @@ const SearchUser: React.FC<Props> = React.memo((props) => {
                         <List.Item key={index} style={{ padding: 20 }}>
                             <List.Item.Meta
                                 avatar={<Avatar src={item.userAvatar || DEFAULT_AVATAR} size={45} />}
-                                title={<HighlightText text={index + "-" + data.length + item.userName} keyword={keyword} />}
-                                description={item.userProfile}
+                                title={<HighlightText text={item.userName} keyword={keyword} />}
+                                description={<HighlightText text={item.userProfile} keyword={keyword} />}
                             />
                             {subscribeView(item, index)}
                         </List.Item>

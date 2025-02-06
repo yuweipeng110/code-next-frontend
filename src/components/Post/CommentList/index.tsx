@@ -127,6 +127,7 @@ const PostCommentList: React.FC<Props> = React.memo((props) => {
 
     return (
         <Card
+            id="comment-list-card"
             tabList={[{
                 key: 'comment',
                 tab: `评论 ${commentListInitLoading ? "" : commentTotal}`,
@@ -162,9 +163,12 @@ const PostCommentList: React.FC<Props> = React.memo((props) => {
                                             {commentItem.userId === post.userId && <AuthorTag />}
                                         </Space>
                                     }
-                                // description={item.description}
+                                    // description={item.description}
+                                    style={{ marginInlineEnd: "none" }}
                                 />
-                                <MdViewer value={commentItem.content} isClamp />
+                                <div style={{ marginLeft: 56, marginTop: -10 }}>
+                                    <MdViewer value={commentItem.content} isClamp />
+                                </div>
                                 <CommentActions comment={commentItem} loadDataCommentList={loadDataCommentList} />
                             </Skeleton>
                         </List.Item>

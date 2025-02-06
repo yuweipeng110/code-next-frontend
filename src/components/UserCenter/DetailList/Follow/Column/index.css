@@ -1,0 +1,99 @@
+.user-center-detail-list-follow-column {
+
+    .column-container {
+        .column-link {
+            display: block;
+
+            &:hover {
+                background: var(--code-gray-3);
+                transition: background-color 0.3s;
+            }
+        }
+
+        .column-wrap {
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            width: 100%;
+
+            /* padding: 0px 20px; */
+            .column-img {
+                padding: 16px 0;
+                width: 150px;
+                height: 116px;
+                border-radius: 2px;
+            }
+
+            .column-right {
+                position: relative;
+                padding: 16px 0;
+                width: calc(100% - 166px);
+                margin-left: 16px;
+                box-sizing: border-box;
+                border-bottom: 1px solid #e5e6eb;
+
+                .first-line {
+                    word-break: break-all;
+
+                    .title {
+                        vertical-align: middle;
+                        display: inline-block;
+                        flex: auto;
+                        font-size: 16px;
+                        line-height: 24px;
+                        color: var(--code-font-1);
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+
+                    .bnts {
+                        flex: none;
+                        width: fit-content;
+                    }
+                }
+
+                .content {
+                    max-width: 450px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    display: inline-block;
+                    /* max-width: 90%; */
+                    /* color: #4e5969; */
+                    color: var(--code-font-2);
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 22px;
+                    margin: 8px 0;
+                }
+
+                .infos {
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 22px;
+                    color: #86909c;
+                    /* color: var(--code-font-4); */
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    word-break: break-all;
+
+                    span {
+                        position: relative;
+
+                        &:not(:last-child):after {
+                            content: "·";
+                            position: absolute;
+                            right: -10px;
+                        }
+
+                        &:not(:last-child) {
+                            margin-right: 15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

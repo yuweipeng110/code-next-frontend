@@ -17,6 +17,7 @@ body {
   word-break: break-word;
   /* TODO */
   /* background: #f2f3f5; */
+  background-color: var(--code-background);
 }
 
 a:hover {
@@ -33,6 +34,14 @@ a:hover {
 
 .max-width-content-1 {
   max-width: 1140px;
+  margin: 0 auto;
+  /* padding: 32px 16px; */
+  /* padding: 0 16px; */
+  width: 100vw;
+}
+
+.max-width-content-2 {
+  max-width: 960px;
   margin: 0 auto;
   /* padding: 32px 16px; */
   /* padding: 0 16px; */
@@ -57,10 +66,18 @@ a:hover {
   align-items: center
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .subscribe-btn {
-  border: 1px solid #37c700 !important;
-  background-color: #fff !important;
-  color: #37c700 !important;
+  /* border: 1px solid #37c700 !important; */
+  /* background-color: #fff !important; */
+  /* color: #37c700 !important; */
+
+  border: 1px solid var(--code-sub-4-green);
+  background: var(--code-popup);
+  color: var(--code-sub-4-green);
 
   &:hover {
     /* background-color: red !important; */
@@ -180,6 +197,7 @@ body {
   --code-coupon_2_card: rgba(255, 245, 244, 0.7);
   --code-coupon_3_stroke: rgba(246, 66, 66, 0.2);
   --code-navigation: #fff;
+  --code-navigation2: rgba(255, 255, 255, 0.6);
   --code-shade-1: rgba(0, 0, 0, 0.4);
   --code-shade-2: rgba(0, 0, 0, 0.6);
   --code-popup: #fff;
@@ -284,6 +302,7 @@ body[data-theme=dark] {
   --code-coupon_2_card: rgba(255, 176, 176, 0.08);
   --code-coupon_3_stroke: rgba(246, 66, 66, 0.18);
   --code-navigation: #181818;
+  --code-navigation2: rgba(24, 24, 24, 0.6);
   --code-shade-1: rgba(0, 0, 0, 0.6);
   --code-shade-2: rgba(0, 0, 0, 0.7);
   --code-popup: #282828;

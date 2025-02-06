@@ -14,33 +14,33 @@ const Notification = () => {
         {
             key: 'comment',
             icon: <CommentOutlined />,
-            label: <Link href={'/notification/comment'}>评论</Link>,
+            label: <Link href={'/notification?type=comment'}>评论</Link>,
         },
         {
             key: 'digg',
             icon: <LikeOutlined />,
-            label: <Link href={'/notification/digg'}>赞和收藏</Link>,
+            label: <Link href={'/notification?type=digg'}>赞和收藏</Link>,
         },
         {
             key: 'follow',
             icon: <UserAddOutlined />,
-            label: <Link href={'/notification/follow'}>新增粉丝</Link>,
+            label: <Link href={'/notification?type=follow'}>新增粉丝</Link>,
         },
         {
             key: 'im',
             icon: <MessageOutlined />,
-            label: <Link href={'/notification/im'}>私信</Link>,
+            label: <Link href={'/notification?type=im'}>私信</Link>,
         },
         {
             key: 'system',
             icon: <SoundOutlined />,
-            label: <Link href={'/notification/system'}><Badge count={5} offset={[30, 8]}>系统通知</Badge></Link>,
+            label: <Link href={'/notification?type=system'}><Badge count={5} offset={[30, 8]}>系统通知</Badge></Link>,
         },
     ];
 
     return (
         <div className="notification" aria-hidden>
-            <Link href={"/notification/comment"} className="flex" style={{ padding: "14px 6px" }}>
+            <Link href={"/notification?type=comment"} className="flex" style={{ padding: "14px 6px" }}>
                 <Dropdown
                     overlayClassName="notification-dropdown"
                     menu={{ items }}
